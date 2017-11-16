@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import {Formularioclie } from "./componets/registroCliente";
 
 @Component({
   selector: 'app-root',
