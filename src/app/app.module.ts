@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
+import {DataBaseService} from './data-base.service'
 
 import { AppComponent } from './app.component';
 import { RegistroClienteComponent } from './registro-cliente/registro-cliente.component';
