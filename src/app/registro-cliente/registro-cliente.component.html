@@ -4,7 +4,7 @@
       <label for="example-text-input" class="col-2 col-form-label">Identificación:</label>
       <div class="col-10">
 
-        <input class="form-control" [(ngModel)]="id" type="text" name="id" placeholder="Idetificación" id="example-text-input" #idvalidar="ngModel" required >
+        <input class="form-control" [(ngModel)]="cliente.id" name="id" placeholder="Idetificación" type="text" value="{{cliente.id}}"  #cliente.id="ngModel" required >
 
         <div [hidden]="idvalidar.valid || idvalidar.pristine" class="alert alert-danger">
             La identificación es requerido

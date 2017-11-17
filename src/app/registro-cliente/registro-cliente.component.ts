@@ -7,7 +7,7 @@ import { Cliente }  from '../model/Clientes/cliente';
   styleUrls: ['./registro-cliente.component.css']
 })
 export class RegistroClienteComponent implements OnInit {
-cliente: Cliente= new Cliente();
+  cliente: Cliente= new Cliente();
   constructor() { }
 
   ngOnInit() {
