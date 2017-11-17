@@ -3,83 +3,45 @@
     <div class="form-group row">
       <label for="example-text-input" class="col-2 col-form-label">Identificación:</label>
       <div class="col-10">
-
-        <input class="form-control" name="id" placeholder="Idetificación" [(ngModel)]="cliente.id" type="text" value="{{cliente.id}}" required #idvalidar="ngModel" >
-
-        <div [hidden]="idvalidar.valid || idvalidar.pristine" class="alert alert-danger">
+        <input class="form-control" name="id" placeholder="Idetificación" [(ngModel)]="cliente.id"
+         type="number" value="{{cliente.id}}"  #idvalidar="ngModel"required pattern="[0-8]*" >
+         <div [hidden]="idvalidar.valid || idvalidar.pristine" class="alert alert-danger">
             La identificación es requerido 
-        </div>
+        </div> </div>
 
-
-      </div>
     </div>
     <div class="form-group row">
-      <label for="example-search-input" class="col-2 col-form-label">Search</label>
+      <label for="example-search-input" class="col-2 col-form-label">Nombres</label>
       <div class="col-10">
-        <input class="form-control" type="search" placeholder="How do I shoot web" id="example-search-input">
-      </div>
-    </div>
-    <div class="form-group row">
-      <label for="example-email-input" class="col-2 col-form-label">Email</label>
-      <div class="col-10">
-        <input class="form-control" type="email" placeholder="bootstrap@example.com" id="example-email-input">
-      </div>
-    </div>
-    <div class="form-group row">
-      <label for="example-url-input" class="col-2 col-form-label">URL</label>
-      <div class="col-10">
-        <input class="form-control" type="url" placeholder="https://getbootstrap.com" id="example-url-input">
-      </div>
-    </div>
-    <div class="form-group row">
-      <label for="example-tel-input" class="col-2 col-form-label">Telephone</label>
-      <div class="col-10">
-        <input class="form-control" type="tel" placeholder="1-(555)-555-5555" id="example-tel-input">
-      </div>
-    </div>
-    <div class="form-group row">
-      <label for="example-password-input" class="col-2 col-form-label">Password</label>
-      <div class="col-10">
-        <input class="form-control" type="password" placeholder="hunter2" id="example-password-input">
-      </div>
+        <input class="form-control" name="name" placeholder="Nombre" [(ngModel)]="cliente.nombre"
+        type="text" value="{{cliente.nombre}}"  #nombrevalidar="ngModel" required>
+        <div [hidden]="nombrevalidar.valid || nombrevalidar.pristine" class="alert alert-danger">
+           El nombre es requerido 
+      </div></div>
     </div>
 
+    <div class="form-group row">
+      <label for="example-search-input" class="col-2 col-form-label">Apellidos</label>
+      <div class="col-10">
+        <input class="form-control" name="apellido" placeholder="Apellido" [(ngModel)]="cliente.apellido"
+        type="text" value="{{cliente.apellido}}"  #apellidovalidar="ngModel" required>
+        <div [hidden]="apellidovalidar.valid || apellidovalidar.pristine" class="alert alert-danger">
+           El apellido es requerido 
+        </div></div>
+    </div>
 
     <div class="form-group row">
-      <label for="example-date-input" class="col-2 col-form-label">Date</label>
+      <label for="example-url-input" class="col-2 col-form-label">Fecha de Nacimieno</label>
       <div class="col-10">
-        <input class="form-control" type="date" placeholder="2011-08-19" id="example-date-input">
-      </div>
+        <input class="form-control" name="fechaNacimiento" placeholder="Fecha de Nacimiento" [(ngModel)]="cliente.fechaNacimiento"
+        type="number" value="{{cliente.fechaNacimiento}}"  #fechavalidar="ngModel" required >
+        <div [hidden]="fechavalidar.valid || fechavalidar.pristine" class="alert alert-danger">
+           La fecha es requerida 
+     </div></div>
+    
     </div>
-    <div class="form-group row">
-      <label for="example-month-input" class="col-2 col-form-label">Month</label>
-      <div class="col-10">
-        <input class="form-control" type="month" placeholder="2011-08" id="example-month-input">
-      </div>
-    </div>
-    <div class="form-group row">
-      <label for="example-week-input" class="col-2 col-form-label">Week</label>
-      <div class="col-10">
-        <input class="form-control" type="week" placeholder="2011-W33" id="example-week-input">
-      </div>
-    </div>
-    <div class="form-group row">
-      <label for="example-time-input" class="col-2 col-form-label">Time</label>
-      <div class="col-10">
-        <input class="form-control" type="time" placeholder="13:45:00" id="example-time-input">
-      </div>
-    </div>
-    <div class="form-group row">
-      <label for="example-color-input" class="col-2 col-form-label">Color</label>
-      <div class="col-10">
-        <input class="form-control" type="color" placeholder="#563d7c" id="example-color-input">
-      </div>
-    </div>
-    <div class="form-group row">
-
-      <div class="col-10">
-        <button type="submit">Enviar</button>
-      </div>
+    <div class="col-10">
+      <button type="submit" class="btn btn-success" disabled="">Enviar</button>
     </div>
   </form>
 </div>
