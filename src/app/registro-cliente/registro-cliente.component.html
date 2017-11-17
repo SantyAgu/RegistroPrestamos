@@ -1,13 +1,13 @@
 <div class="container">
-  <form action="">
+  <form >
     <div class="form-group row">
       <label for="example-text-input" class="col-2 col-form-label">Identificación:</label>
       <div class="col-10">
 
-        <input class="form-control"  name="id" placeholder="Idetificación" [(ngModel)]="cliente.id" type="text" value="{{cliente.id}}" required #idvalidar="ngModel" >
+        <input class="form-control" name="id" placeholder="Idetificación" [(ngModel)]="cliente.id" type="text" value="{{cliente.id}}" required #idvalidar="ngModel" >
 
         <div [hidden]="idvalidar.valid || idvalidar.pristine" class="alert alert-danger">
-            La identificación es requerido esto es id: {{cliente.id}}
+            La identificación es requerido 
         </div>
 
 
