@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Cliente }  from '../Clientes/cliente';
+import { Cliente }  from '../model/Clientes/cliente';
 
 @Component({
   selector: 'app-registro-cliente',
