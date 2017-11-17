@@ -6,7 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./registro-cliente.component.css']
 })
 export class RegistroClienteComponent implements OnInit {
-
+  id:String;
   constructor() { }
 
   ngOnInit() {
