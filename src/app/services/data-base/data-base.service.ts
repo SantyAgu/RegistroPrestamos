@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { Http, Response, Headers, URLSearchParams, RequestOptions } from '@angular/http';
-import 'rxjs/add/operator/map';
 import { Cliente } from '../../model/Clientes/cliente'
 import { DatosEmpresa } from '../../model/DatosEmpresa/datos-empresa'
 
@@ -88,7 +87,6 @@ export class DataBaseService {
           return 0;
         else
         return JSON.parse(data["_body"]).SQLreturn[0];
-        
       });
    
   }
