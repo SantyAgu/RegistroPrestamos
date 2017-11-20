@@ -6,12 +6,14 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { AppComponent } from './app.component';
 import { RegistroClienteComponent } from './registro-cliente/registro-cliente.component';
+import { AprobacionClienteComponent } from './aprobacion-cliente/aprobacion-cliente.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    RegistroClienteComponent
+    RegistroClienteComponent,
+    AprobacionClienteComponent
   ],
   imports: [
     FormsModule,
