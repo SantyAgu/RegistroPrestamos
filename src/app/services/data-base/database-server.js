@@ -1,5 +1,7 @@
 var express = require('express');
 var app = express();
+
+
 var sql = require("mssql");
 var config = {
     user: 'WebUser',
@@ -9,6 +11,10 @@ var config = {
 };
 var connection;
 var request;
+
+
+
+
 
 app.get('/select', function (req, res) {
     //Se muestra qué consulta se hace y se configura la respuesta del servidor
@@ -106,6 +112,7 @@ app.get('/update/:ID/:NombreEmp/:NIT/:Salario/:Fecha', function (req, res) {
 });
 
 
-var server = app.listen(5000, function () {
+app.listen(5000, function () {
     console.log('Server is running..');
+
 });

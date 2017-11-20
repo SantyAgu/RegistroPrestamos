@@ -8,27 +8,38 @@ import { DataBaseService } from '../services/data-base/data-base.service'
   styleUrls: ['./registro-cliente.component.css']
 })
 export class RegistroClienteComponent implements OnInit {
-  constructor(private _dataBaseService:DataBaseService){}
+  constructor(private _dataBaseService: DataBaseService) { }
 
 
   cliente: Cliente = new Cliente();
+  clienteverify: Cliente = new Cliente();
   fecha = (new Date().getFullYear() - 18) + "-" + (new Date().getMonth() + 1) + "-" + new Date().getDate();
   validar: boolean = false;
   igual = (new Date().getFullYear() - 18) + "-" + (new Date().getMonth() + 1) + "-" + new Date().getDate();
-  mostrarId="La identificación es requerida "
-  validacionID:boolean = false;
+  mostrarId = "La identificación es requerida ";
+  validacionID: boolean;
   //minDate =;
   ngOnInit() {
     console.log(this.fecha)
   }
 
   Enviar(form): boolean {
-    console.log(this.validacionID)
+
+    if (this.clienteverify.id == 0) {
+      this.validacionID= true;
+      this.mostrarId = "La identificación es requerida ";
+  }
+    else {
+      this.validacionID= false;
+      this.mostrarId = "La identificación ya existe en la base de datos";
+  
+    }
+    console.log(this.validacionID);
     this.validar = false;
     try {
-      if (form._directives[0].value.valueOf() > 0) {
+      if (form._directives[0].value.valueOf() > 0 && this.validacionID)  {
         if (form._directives[1].value != "") {
-          if (form._directives[2].value != "") {            
+          if (form._directives[2].value != "") {
             try {
               if (form._directives[3].value.getFullYear() == new Date().getFullYear()) { }
             }
@@ -43,16 +54,13 @@ export class RegistroClienteComponent implements OnInit {
     }
     return this.validar;
   }
-  ExisteId(id){
+
+
+  ExisteId(id) {
     console.log(id.model);
-    let a = this._dataBaseService.getClienteID(id.model);
-    if (a.id ==0) {
-      this.mostrarId="La identificación es requerida";
-      this.validacionID= true;
-    } else {
-      this.mostrarId="El usuario ya existe en la base de datos";
-      this.validacionID= false;
-    }
+    this.clienteverify = this._dataBaseService.getClienteID(id.model);
+    (console.log(this.clienteverify));
   }
+
 
 }
