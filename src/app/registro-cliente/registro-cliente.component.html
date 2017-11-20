@@ -14,7 +14,7 @@
       <label for="example-search-input" class="col-2 col-form-label">Nombres</label>
       <div class="col-10">
         <input class="form-control" name="name" placeholder="Nombre" [(ngModel)]="cliente.nombre"
-        type="text" value="{{cliente.nombre}}"  #nombrevalidar="ngModel" required>
+        type="text" value="{{cliente.nombre}}"  #nombrevalidar="ngModel" required pattern="[A-Z][a-z]*">
         <div [hidden]="nombrevalidar.valid || nombrevalidar.pristine" class="alert alert-danger">
            El nombre es requerido 
       </div></div>
@@ -24,7 +24,7 @@
       <label for="example-search-input" class="col-2 col-form-label">Apellidos</label>
       <div class="col-10">
         <input class="form-control" name="apellido" placeholder="Apellido" [(ngModel)]="cliente.apellido"
-        type="text" value="{{cliente.apellido}}"  #apellidovalidar="ngModel" required>
+        type="text" value="{{cliente.apellido}}"  #apellidovalidar="ngModel" required pattern="[A-Z][a-z]*">
         <div [hidden]="apellidovalidar.valid || apellidovalidar.pristine" class="alert alert-danger">
            El apellido es requerido 
         </div></div>
@@ -41,7 +41,7 @@
     
     </div>
     <div class="col-10">
-      <button type="submit" class="btn btn-success" [disabled] ="!clienteForm.form.valid">Enviar</button>
+      <button type="submit" class="btn btn-success" style="cursor: pointer;" [disabled] ="!clienteForm.form.valid">Enviar</button>
     </div>
   </form>
 </div>

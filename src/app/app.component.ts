@@ -14,11 +14,13 @@ import {OnInit} from '@angular/core';
 
 
 export class AppComponent implements OnInit {
-  constructor(private userService: DataBaseService) {}
-  profile = {};
+
+  constructor(private _dataBaseService: DataBaseService) {}
+  
 ngOnInit() {
-  let a =(this.userService.getClientes());
+  const a =(this._dataBaseService.getClientes());
   console.log(a);
+
   }
 }
  
