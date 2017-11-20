@@ -12,7 +12,7 @@ import {AprobacionClienteComponent} from './aprobacion-cliente/aprobacion-client
 
 const appRoutes: Routes = [
   { path: 'registroCliente', component: RegistroClienteComponent },
-  { path: 'Aprovacion/:id',      component: AprobacionClienteComponent },  
+  { path: 'Aprobacion',  component: AprobacionClienteComponent },  
   { path: '',
     redirectTo: '/registroCliente',
     pathMatch: 'full'
@@ -23,7 +23,8 @@ const appRoutes: Routes = [
 @NgModule({
   declarations: [
     AppComponent,
-    RegistroClienteComponent
+    RegistroClienteComponent,
+    AprobacionClienteComponent
     
   ],
   imports: [

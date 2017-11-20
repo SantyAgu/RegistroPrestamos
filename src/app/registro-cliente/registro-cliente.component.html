@@ -9,7 +9,7 @@
       <label for="example-text-input" class="col-2 col-form-label">Identificación:</label>
       <div class="col-10">
         <input class="form-control" name="id" placeholder="Idetificación" [(ngModel)]="cliente.id" type="number" value="{{cliente.id}}"
-          #idvalidar="ngModel" required pattern="[0-8]*" (blur)="ExisteId(idvalidar)">
+          #idvalidar="ngModel" required pattern="[0-9]*" (blur)="ExisteId(idvalidar)">
         <div [hidden]="idvalidar.valid || idvalidar.pristine " class="alert alert-danger">
           {{mostrarId}}
         </div>
@@ -50,7 +50,8 @@
 
     </div>
     <div class="col-10">
-      <button type="submit" class="btn btn-success" style="cursor: pointer;" [disabled]="!Enviar(clienteForm)">Enviar</button>
+      <button type="submit" class="btn btn-success" style="cursor: pointer;" [disabled]="!Enviar(clienteForm)" routerLinkActive="active" routerLink="/Aprobacion" (click)="guardar()">Enviar</button>
+      
     </div>
   </form>
 </div>

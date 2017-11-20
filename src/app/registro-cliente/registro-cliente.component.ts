@@ -61,6 +61,10 @@ export class RegistroClienteComponent implements OnInit {
     this.clienteverify = this._dataBaseService.getClienteID(id.model);
     (console.log(this.clienteverify));
   }
+  guardar(){
+    alert ("guardar");
+    this._dataBaseService.insertCliente(this.cliente);
+  }
 
 
 }
