@@ -9,8 +9,14 @@ import {DataBaseService} from '../services/data-base/data-base.service'
 })
 export class RegistroClienteComponent implements OnInit {
   cliente: Cliente= new Cliente();
+  fecha = (new Date().getFullYear()-18) +"-"+ (new Date().getMonth()+1) +"-"+ new Date().getDate() ;
+  
+  
+  
+  //minDate =;
   ngOnInit() {
-    
+    console.log(this.fecha)
   }
+  
 
 }
