@@ -74,6 +74,33 @@ app.get('/insert/:ID/:Nombre/:Apellido/:Fecha', function (req, res) {
             res.json({
                 ERROR: err
             });
+        }       
+    });
+});
+
+
+app.get('/update/:ID/:NombreEmp/:NIT/:Salario/:Fecha', function (req, res) {
+    console.log("UPDATE VALUES id = " + req.params.ID);
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    sql.connect(config,function (err) {
+        request = new sql.Request();
+        try {
+            request.query('update Cliente set cliente_NombreDeEmpresa=\'' + req.params.NombreEmp +'\', cliente_NIT = ' + req.params.NIT + ', cliente_Salario = ' + req.params.Salario +', cliente_FechaDeIngreso = \''+ req.params.Fecha +'\'  where pk_cliente_id = ' +  req.params.ID, function (err, recordset) {
+                sql.close();
+                if (err)
+                    res.json({
+                        ERROR: err
+                    });
+                else
+                    res.json({
+                        SQLreturn: recordset.rowsAffected
+                    });
+            });
+        }
+        catch (error) {
+            res.json({
+                ERROR: err
+            });
         }
     });
 });

@@ -16,15 +16,17 @@ export class RegistroClienteComponent implements OnInit {
   validar: boolean = false;
   igual = (new Date().getFullYear() - 18) + "-" + (new Date().getMonth() + 1) + "-" + new Date().getDate();
   mostrarId="La identificación es requerida "
-
+  validacionID:boolean = false;
   //minDate =;
   ngOnInit() {
     console.log(this.fecha)
   }
+
   Enviar(form): boolean {
+    console.log(this.validacionID)
     this.validar = false;
     try {
-      if (form._directives[0].value.valueOf() > 0 && this.ExisteId(form._directives[0].value.valueOf())) {
+      if (form._directives[0].value.valueOf() > 0) {
         if (form._directives[1].value != "") {
           if (form._directives[2].value != "") {            
             try {
@@ -41,14 +43,15 @@ export class RegistroClienteComponent implements OnInit {
     }
     return this.validar;
   }
-  ExisteId(id):boolean{
-    let a = this._dataBaseService.getClienteID(id);
+  ExisteId(id){
+    console.log(id.model);
+    let a = this._dataBaseService.getClienteID(id.model);
     if (a.id ==0) {
       this.mostrarId="La identificación es requerida";
-      return true;
+      this.validacionID= true;
     } else {
       this.mostrarId="El usuario ya existe en la base de datos";
-      return false;
+      this.validacionID= false;
     }
   }
 

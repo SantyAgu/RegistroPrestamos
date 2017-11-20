@@ -4,7 +4,7 @@
       <label for="example-text-input" class="col-2 col-form-label">Identificación:</label>
       <div class="col-10">
         <input class="form-control" name="id" placeholder="Idetificación" [(ngModel)]="cliente.id"
-         type="number" value="{{cliente.id}}"  #idvalidar="ngModel"required pattern="[0-8]*" >
+         type="number" value="{{cliente.id}}"  #idvalidar="ngModel" required pattern="[0-8]*" (blur)="ExisteId(idvalidar)" >
          <div [hidden]="idvalidar.valid || idvalidar.pristine" class="alert alert-danger">
            {{mostrarId}}
         </div> </div>
