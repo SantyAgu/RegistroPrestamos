@@ -17,6 +17,8 @@ export class AppComponent implements OnInit {
   constructor(private userService: DataBaseService) {}
   profile = {};
 ngOnInit() {
+  let a =(this.userService.getClientes());
+  console.log(a);
   }
 }
  
