@@ -83,7 +83,6 @@ export class DataBaseService {
   insertCliente(cl: Cliente) {
     let results;
     let url = "http://192.168.3.187:5000/insert/" + cl.id + "/" + cl.nombre + "/" + cl.apellido + "/" + cl.fechaNacimiento;
-    if (this.getClienteID(cl.id) == new Cliente()) {
       this.http.get(url).subscribe(data => {
         if (JSON.parse(data["_body"]).ERROR != undefined)
           return 0;
@@ -91,8 +90,6 @@ export class DataBaseService {
         return JSON.parse(data["_body"]).SQLreturn[0];
         
       });
-    }
-    else
-      return 0;
+   
   }
 }
