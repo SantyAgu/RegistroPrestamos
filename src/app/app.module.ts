@@ -6,18 +6,35 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { AppComponent } from './app.component';
 import { RegistroClienteComponent } from './registro-cliente/registro-cliente.component';
+import { RouterModule, Routes } from '@angular/router';
+import {AprobacionClienteComponent} from './aprobacion-cliente/aprobacion-cliente.component';
 
+
+const appRoutes: Routes = [
+  { path: 'registroCliente', component: RegistroClienteComponent },
+  { path: 'Aprovacion/:id',      component: AprobacionClienteComponent },  
+  { path: '',
+    redirectTo: '/registroCliente',
+    pathMatch: 'full'
+  },
+  { path: '**', component: RegistroClienteComponent }
+];
 
 @NgModule({
   declarations: [
     AppComponent,
     RegistroClienteComponent
+    
   ],
   imports: [
     FormsModule,
     BrowserModule,
     HttpModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    RouterModule.forRoot(
+      appRoutes,
+      { enableTracing: true } // <-- debugging purposes only
+    )
   ],
   providers: [DataBaseService],
   bootstrap: [AppComponent]
