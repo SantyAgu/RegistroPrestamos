@@ -31,7 +31,7 @@
       <label for="example-search-input" class="col-2 col-form-label">Apellidos</label>
       <div class="col-10">
         <input class="form-control" name="apellido" placeholder="Apellido" [(ngModel)]="cliente.apellido" type="text" value="{{cliente.apellido}}"
-          #apellidovalidar="ngModel" required pattern="[A-Z,a-z]*">
+          #apellidovalidar="ngModel" required pattern="[A-Z,a-z,\s]*">
         <div [hidden]="apellidovalidar.valid || apellidovalidar.pristine" class="alert alert-danger">
           El apellido es requerido
         </div>
