@@ -22,7 +22,7 @@ export class DataBaseService {
 
   getClientes() {
     let results;
-    let url = "http://CPX-I8O9NOUETXP:5000/select";
+    let url = "http://192.168.3.187:5000/select";
     this.http.get(url).subscribe(data => {
       results = JSON.parse(data["_body"]).SQLreturn[0];
       for (let i = 0; i < results.length; i++) {
@@ -44,7 +44,7 @@ export class DataBaseService {
     let results;
     let de: DatosEmpresa;
     de = new DatosEmpresa();
-    let url = "http://CPX-I8O9NOUETXP:5000/select/"+ id;
+    let url = "http://192.168.3.187:5000/select/"+ id;
     this.http.get(url).subscribe(data => {
       
       results = JSON.parse(data["_body"]).SQLreturn[0];
@@ -63,7 +63,7 @@ export class DataBaseService {
     let results;
     let cl: Cliente;
     cl = new Cliente();
-    let url = "http://CPX-I8O9NOUETXP:5000/select/" + id;
+    let url = "http://192.168.3.187:5000/select/" + id;
     this.http.get(url).subscribe(data => {
       results = JSON.parse(data["_body"]).SQLreturn[0];
       for (let i = 0; i < results.length; i++) {
@@ -82,7 +82,7 @@ export class DataBaseService {
 
   insertCliente(cl: Cliente) {
     let results;
-    let url = "http://CPX-I8O9NOUETXP:5000/insert/" + cl.id + "/" + cl.nombre + "/" + cl.apellido + "/" + cl.fechaNacimiento;
+    let url = "http://192.168.3.187:5000/insert/" + cl.id + "/" + cl.nombre + "/" + cl.apellido + "/" + cl.fechaNacimiento;
     if (this.getClienteID(cl.id) == new Cliente()) {
       this.http.get(url).subscribe(data => {
         if (JSON.parse(data["_body"]).ERROR != undefined)
