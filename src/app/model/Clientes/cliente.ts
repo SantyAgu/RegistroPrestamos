@@ -5,5 +5,9 @@ export class Cliente{
 	public fechaNacimiento:Date;
 
 	constructor(){
+		this.id=0;
+		this.nombre="";
+		this.apellido="";
+		this.fechaNacimiento=new Date();
 	}
 }

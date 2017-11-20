@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Cliente }  from '../model/Clientes/cliente';
-
+import {DataBaseService} from '../services/data-base/data-base.service'
 
 @Component({
   selector: 'app-registro-cliente',
@@ -9,9 +9,8 @@ import { Cliente }  from '../model/Clientes/cliente';
 })
 export class RegistroClienteComponent implements OnInit {
   cliente: Cliente= new Cliente();
-  constructor() { }
-
   ngOnInit() {
+    
   }
 
 }
