@@ -8,20 +8,18 @@ import { DatosEmpresa } from '../../model/DatosEmpresa/datos-empresa'
 
 
 export class DataBaseService {
-
-  constructor(
-    private http: Http
-  ) {
+  
+  private _clientes: Array<Cliente>;
+  
+  constructor(private http: Http) {
     this._clientes = new Array<Cliente>();
-
   }
 
-  private _clientes: Array<Cliente>;
 
 
   getClientes() {
     let results;
-    let url = "http://192.168.3.187:5000/select";
+    let url = "http://CPX-I8O9NOUETXP:5000/select";
     this.http.get(url).subscribe(data => {
       results = JSON.parse(data["_body"]).SQLreturn[0];
       for (let i = 0; i < results.length; i++) {
@@ -43,7 +41,7 @@ export class DataBaseService {
     let results;
     let de: DatosEmpresa;
     de = new DatosEmpresa();
-    let url = "http://192.168.3.187:5000/select/"+ id;
+    let url = "http://CPX-I8O9NOUETXP:5000/select/"+ id;
     this.http.get(url).subscribe(data => {
       
       results = JSON.parse(data["_body"]).SQLreturn[0];
@@ -62,7 +60,7 @@ export class DataBaseService {
     let results;
     let cl: Cliente;
     cl = new Cliente();
-    let url = "http://192.168.3.187:5000/select/" + id;
+    let url = "http://CPX-I8O9NOUETXP:5000/select/" + id;
     this.http.get(url).subscribe(data => {
       results = JSON.parse(data["_body"]).SQLreturn[0];
       for (let i = 0; i < results.length; i++) {
@@ -81,13 +79,20 @@ export class DataBaseService {
 
   insertCliente(cl: Cliente) {
     let results;
+<<<<<<< HEAD
+    let url = "http://CPX-I8O9NOUETXP:5000/insert/" + cl.id + "/" + cl.nombre + "/" + cl.apellido + "/" + cl.fechaNacimiento;
+=======
     let url = "http://192.168.3.187:5000/insert/" + cl.id + "/" + cl.nombre + "/" + cl.apellido + "/" + cl.fechaNacimiento;
+>>>>>>> 062a149058e7b39f003636aa3b8cd15e1bbabf04
       this.http.get(url).subscribe(data => {
         if (JSON.parse(data["_body"]).ERROR != undefined)
           return 0;
         else
         return JSON.parse(data["_body"]).SQLreturn[0];
       });
+<<<<<<< HEAD
+=======
    
+>>>>>>> 062a149058e7b39f003636aa3b8cd15e1bbabf04
   }
 }
