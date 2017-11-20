@@ -46,10 +46,9 @@ export class DataBaseService {
     de = new DatosEmpresa();
     let url = "http://CPX-I8O9NOUETXP:5000/select/"+ id;
     this.http.get(url).subscribe(data => {
+      
       results = JSON.parse(data["_body"]).SQLreturn[0];
       for (let i = 0; i < results.length; i++) {
-        
-
         de.NombreEmpresa = results[i].cliente_NombreDeEmpresa;
         de.NIT = results[i].cliente_NIT;
         de.salario = results[i].cliente_Salario;
