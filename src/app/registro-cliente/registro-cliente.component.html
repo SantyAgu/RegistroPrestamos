@@ -5,53 +5,73 @@
       Digite el siguente formulario:
 
     </div>
-    <div class="form-group row">
-      <label for="example-text-input" class="col-2 col-form-label">Identificación:</label>
+    <div  [class]= " ChangeClassID(idvalidar) ">
+      <label for="example-text-input" class="col-2 col-form-label">Identificación*:</label>
       <div class="col-10">
-        <input class="form-control" name="id" placeholder="Idetificación" [(ngModel)]="cliente.id" type="number" value="{{cliente.id}}"
-          #idvalidar="ngModel" required pattern="[0-9]*" (blur)="ExisteId(idvalidar)">
-        <div [hidden]="idvalidar.valid || idvalidar.pristine " class="alert alert-danger">
-          {{mostrarId}}
-        </div>
+        <input class="form-control"
+        autocomplete="off"
+       name="id" placeholder="Idetificación" [(ngModel)]="cliente.id" type="number" value="{{cliente.id}}"
+          #idvalidar="ngModel" required pattern="[0-9]*" (keyup)="ExisteId(idvalidar)">
+         
+        
+          <div [hidden]="idvalidar.valid || idvalidar.pristine " class="alert alert-danger">
+            La identificación es requerida
+          </div>
+          <div   [hidden]="Intervalo(t) || !idvalidar.valid " class="alert alert-danger">
+            La identificación ya existe en la base de datos 
+          </div>
       </div>
 
     </div>
-    <div class="form-group row">
-      <label for="example-search-input" class="col-2 col-form-label">Nombres</label>
+
+
+    <div [class]= " ChangeClassNames(nombrevalidar) ">
+      <label for="example-search-input" class="col-2 col-form-label">Nombres*:</label>
       <div class="col-10">
         <input class="form-control" name="name" placeholder="Nombre" [(ngModel)]="cliente.nombre" type="text" value="{{cliente.nombre}}"
           #nombrevalidar="ngModel" required pattern="[A-Z,a-z,\s]*">
-        <div [hidden]="nombrevalidar.valid || nombrevalidar.pristine" class="alert alert-danger">
+        <div [hidden]=" !cliente.nombre=='' || nombrevalidar.pristine" class="alert alert-danger">
           El nombre es requerido
+        </div>
+        <div [hidden]="nombrevalidar.valid || nombrevalidar.pristine || cliente.nombre==''" class="alert alert-danger">
+          El nombre no es válido
         </div>
       </div>
     </div>
 
-    <div class="form-group row">
-      <label for="example-search-input" class="col-2 col-form-label">Apellidos</label>
+    <div [class]= " ChangeClassNames(apellidovalidar) ">
+      <label for="example-search-input" class="col-2 col-form-label">Apellidos*:</label>
       <div class="col-10">
         <input class="form-control" name="apellido" placeholder="Apellido" [(ngModel)]="cliente.apellido" type="text" value="{{cliente.apellido}}"
           #apellidovalidar="ngModel" required pattern="[A-Z,a-z,\s]*">
-        <div [hidden]="apellidovalidar.valid || apellidovalidar.pristine" class="alert alert-danger">
+
+        <div [hidden]=" !cliente.apellido=='' || apellidovalidar.pristine " class="alert alert-danger">
           El apellido es requerido
         </div>
+        <div [hidden]="apellidovalidar.valid || apellidovalidar.pristine || cliente.apellido=='' " class="alert alert-danger">
+          El apellido no es válido
+        </div>
+
       </div>
     </div>
 
-    <div class="form-group row">
-      <label for="example-url-input" class="col-2 col-form-label">Fecha de Nacimieno
+    <div [class]="ChangeClassFecha(fechavalidar)">
+      <label for="example-url-input" class="col-2 col-form-label">Fecha de Nacimiento*:
         <p style="font-size: 11px">(Debe ser mayor de 18 años)</p>
       </label>
       <div class="col-10">
-        <input class="form-control" name="fechaNacimiento" placeholder="Fecha de Nacimiento" [(ngModel)]="cliente.fechaNacimiento"
+
+        <input  class="form-control" name="fechaNacimiento" placeholder="Fecha de Nacimiento" [(ngModel)]="cliente.fechaNacimiento"
           type="date" max="{{fecha}}" value="{{igual}}" #fechavalidar="ngModel" required>
 
+          <div   [hidden]="!(cliente.fechaNacimiento>fecha)   || fechavalidar.pristine" class="alert alert-danger">
+            Debe ser mayor a 18 años 
+          </div>
       </div>
 
     </div>
     <div class="col-10">
-      <button type="submit" class="btn btn-success" style="cursor: pointer;" [disabled]="!Enviar(clienteForm)" routerLinkActive="active" routerLink="/Aprobacion" (click)="guardar()">Enviar</button>
-      
+      <button type="submit" class="btn btn-success" style="cursor: pointer;" [disabled]="!Enviar(clienteForm)"  (click)="guardar()">Enviar</button>
     </div>
   </form>
 </div>

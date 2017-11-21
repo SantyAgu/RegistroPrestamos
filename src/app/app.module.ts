@@ -12,7 +12,7 @@ import {AprobacionClienteComponent} from './aprobacion-cliente/aprobacion-client
 
 const appRoutes: Routes = [
   { path: 'registroCliente', component: RegistroClienteComponent },
-  { path: 'Aprobacion',  component: AprobacionClienteComponent },  
+  { path: 'Aprobacion/:id',  component: AprobacionClienteComponent },  
   { path: '',
     redirectTo: '/registroCliente',
     pathMatch: 'full'
