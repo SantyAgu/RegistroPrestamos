@@ -6,7 +6,7 @@
     <div class="form-group row">
       <label for="example-text-input" class="col-2 col-form-label">Nombre Empresa</label>
       <div class="col-10">
-        <input class="form-control" name="nombEmpreValidar" placeholder="Nombre de la empresa" [(ngModel)]="datos-empresa.NombreEmpresa" type="text" #nombEmpreValidar="ngModel" required pattern="[A-Z,a-z,0-9,\s]*">
+        <input class="form-control" name="nombEmpreValidar" placeholder="Nombre de la empresa" [(ngModel)]="datos_empresa.NombreEmpresa" type="text" #nombEmpreValidar="ngModel" required pattern="[A-Z,a-z,0-9,\s]*">
         <!-- Ventana emergente -->
         <div [hidden]="nombEmpreValidar.valid || nombEmpreValidar.pristine" class="alert alert-danger">
             {{mostrarmonbre}}
@@ -18,7 +18,7 @@
     <div class="form-group row">
       <label for="example-text-input" class="col-2 col-form-label">Nit Empresa</label>
       <div class="col-10">
-        <input class="form-control" name="NIT" placeholder="Nit de la Empresa" [(ngModel)]="datos-empresa.NIT" type="number" #nitvalidar="ngModel" required pattern="[0-9,-]*">
+        <input class="form-control" name="NIT" placeholder="Nit de la Empresa" [(ngModel)]="datos_empresa.NIT" type="number" #nitvalidar="ngModel" required pattern="[0-9,-]*">
           <!-- Ventana emergente -->
         <div [hidden]="nitvalidar.valid || nitvalidar.pristine" class="alert alert-danger">
           {{mostrarnit}}
@@ -26,31 +26,31 @@
       </div>
     </div>
     <!-- Input para llenar el Salario Actual -->
-    <div class="form-group row">
+    <div class="form-group row {{clase_salario}}"  >
       <label for="example-text-input" class="col-2 col-form-label">Salario Actual</label>
       <div class="col-10">
-        <input class="form-control" name="salario" placeholder="Salario" [(ngModel)]="cliente.id" type="number" #salariotvalidar="ngModel">
+        <input class="form-control" name="salario" placeholder="Salario" [(ngModel)]="datos_empresa.salario" type="number" pattern="[0-9]*" #salariotvalidar="ngModel" (keyup)="salario(salariotvalidar)">{{mostrarnsalario}}
           <!-- Ventana emergente -->
         <div [hidden]="salariotvalidar.valid || salariotvalidar.pristine" class="alert alert-danger">
-          {{mostrarnsalario}}
+          
         </div>
       </div>
     </div>
+    
     <!-- Input para llenar Fecha de ingreso -->
-    <div class="form-group row">
+    <div class="form-group row ">
       <label for="example-text-input" class="col-2 col-form-label">Fecha de Ingreso</label>
       <div class="col-10">
-        <input class="form-control" name="FechaIngreso" placeholder="Fecha" [(ngModel)]="cliente.id" type="date" value="{{datos-empresa.FechaIngreso}}"
-          #fechavalidar="ngModel">
+          <input  class="form-control" name="fechaNacimiento"  [(ngModel)]="datos_empresa.FechaIngreso"  type="date" #fechaIngresovalidar="ngModel" required max="{{fecha}}" value="{{igual}}">
+          {{fecha}}
+        <!-- <input class="form-control" name="FechaIngreso" type="date" placeholder="Fecha de Ingreso" [(ngModel)]="datos_empresa.FechaIngreso"  #fechavalidar="ngModel" max="{{fecha}}">{{fecha}} -->
           <!-- Ventana emergente -->
-        <div [hidden]="fechavalidar.valid || fechavalidar.pristine" class="alert alert-danger">
-            {{mostrarfecha}}
-        </div>
+        
       </div>
     </div>
 
     <div class="col-10">
-      <button type="submit" class="btn btn-success" style="cursor: pointer;" [disabled]="!Enviar(datosempresaForm)">Enviar para aprobación</button>
+      <button type="submit" class="btn btn-success" style="cursor: pointer;" [disabled]="true">Enviar para aprobación</button>
     </div>
 
 
