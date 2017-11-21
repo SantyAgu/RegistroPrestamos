@@ -2,7 +2,9 @@ import { Injectable } from '@angular/core';
 import { Http, Response, Headers, URLSearchParams, RequestOptions } from '@angular/http';
 import { Cliente } from '../../model/Clientes/cliente'
 import { DatosEmpresa } from '../../model/DatosEmpresa/datos-empresa'
-
+import { bindCallback } from 'rxjs/observable/bindCallback';
+import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/operator/map'
 @Injectable()
 
 
@@ -60,14 +62,14 @@ export class DataBaseService {
   }
 
   getClienteID(id: Number) {
-    
-    let cl:Cliente;
+
+    let cl: Cliente;
     cl = new Cliente();
     let url = "http://192.168.3.187:5000/select/" + id;
     this.http.get(url).subscribe(res => {
       let results;
       results = JSON.parse(res["_body"]).SQLreturn[0];
-      if (results.length>0) {
+      if (results.length > 0) {
 
         cl.id = results[0].pk_cliente_id;
         cl.nombre = results[0].cliente_nombre;
@@ -85,11 +87,17 @@ export class DataBaseService {
   insertCliente(cl: Cliente) {
     let results;
     let url = "http://192.168.3.187:5000/insert/" + cl.id + "/" + cl.nombre + "/" + cl.apellido + "/" + cl.fechaNacimiento;
-    this.http.get(url).subscribe(data => {
-      if (JSON.parse(data["_body"]).ERROR != undefined)
-        return 0;
-      else
-        return JSON.parse(data["_body"]).SQLreturn[0];
+    let sub = this.http.get(url).subscribe(data => {
+      if (JSON.parse(data["_body"]).ERROR != undefined) {
+
+        results = true;
+      }
+      else {
+
+        results = false;
+      }
     });
+    return results;
   }
 }
+
