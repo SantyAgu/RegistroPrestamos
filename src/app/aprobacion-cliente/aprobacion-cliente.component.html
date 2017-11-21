@@ -1,52 +1,61 @@
 <div class="container">
   <h1>Aprobacion cliente </h1>
-  <form (ngSubmit)="onSubmit()" #datosempresaForm="ngForm" >
+  <form #datosempresaForm="ngForm">
+    
+    <!-- Input para llenar el nombre de la empresa -->
     <div class="form-group row">
       <label for="example-text-input" class="col-2 col-form-label">Nombre Empresa</label>
       <div class="col-10">
-        <input class="form-control" name="nombvalidar" placeholder="Nombre Empresa" [(ngModel)]="datos-empresa.NombreEmpresa"
-         type="text" value="{{datos-empresa.NombreEmpresa}}"  #nombvalidar="ngModel" required pattern="[A-Z,a-z,\s]*" >
-         <div [hidden]="nombvalidar.valid || nombvalidar.pristine" class="alert alert-danger">
-           El nombre es requerido
-        </div> </div>
+        <input class="form-control" name="nombEmpreValidar" placeholder="Nombre de la empresa" [(ngModel)]="datos-empresa.NombreEmpresa" type="text" #nombEmpreValidar="ngModel" required pattern="[A-Z,a-z,0-9,\s]*">
+        <!-- Ventana emergente -->
+        <div [hidden]="nombEmpreValidar.valid || nombEmpreValidar.pristine" class="alert alert-danger">
+            {{mostrarmonbre}}
+        </div>
+      </div>
     </div>
-        <div class="form-group row">
-          <label for="example-text-input" class="col-2 col-form-label">Nit Empresa</label>
-          <div class="col-10">
-            <input class="form-control" name="NIT" placeholder="Nit" [(ngModel)]="datos-empresa.NIT"
-             type="number" value="{{datos-empresa.NIT}}"  #nitvalidar="ngModel" required pattern="[0-9]*" >
-             <div [hidden]="nitvalidar.valid || nitvalidar.pristine" class="alert alert-danger">
-               {{mostrarnit}}
-            </div> </div>
+
+    <!-- Input para llenar el nit de la empresa -->
+    <div class="form-group row">
+      <label for="example-text-input" class="col-2 col-form-label">Nit Empresa</label>
+      <div class="col-10">
+        <input class="form-control" name="NIT" placeholder="Nit de la Empresa" [(ngModel)]="datos-empresa.NIT" type="number" #nitvalidar="ngModel" required pattern="[0-9,-]*">
+          <!-- Ventana emergente -->
+        <div [hidden]="nitvalidar.valid || nitvalidar.pristine" class="alert alert-danger">
+          {{mostrarnit}}
         </div>
-
-        <div class="form-group row">
-          <label for="example-text-input" class="col-2 col-form-label">Salario Actual</label>
-          <div class="col-10">
-            <input class="form-control" name="salario" placeholder="Salario" [(ngModel)]="cliente.id"
-             type="number" value="{{datos-empresa.salario}}"  #salariotvalidar="ngModel">
-             <div [hidden]="salariotvalidar.valid || salariotvalidar.pristine" class="alert alert-danger">
-               {{mostrarnsalario}}
-            </div> </div>
+      </div>
+    </div>
+    <!-- Input para llenar el Salario Actual -->
+    <div class="form-group row">
+      <label for="example-text-input" class="col-2 col-form-label">Salario Actual</label>
+      <div class="col-10">
+        <input class="form-control" name="salario" placeholder="Salario" [(ngModel)]="cliente.id" type="number" #salariotvalidar="ngModel">
+          <!-- Ventana emergente -->
+        <div [hidden]="salariotvalidar.valid || salariotvalidar.pristine" class="alert alert-danger">
+          {{mostrarnsalario}}
         </div>
-
-        <div class="form-group row">
-          <label for="example-text-input" class="col-2 col-form-label">Fecha de Ingreso</label>
-          <div class="col-10">
-            <input class="form-control" name="FechaIngreso" placeholder="Fecha" [(ngModel)]="cliente.id"
-             type="date" value="{{datos-empresa.FechaIngreso}}"  #fechavalidar="ngModel">
-             <div [hidden]="fechavalidar.valid || fechavalidar.pristine" class="alert alert-danger">
-          
-            </div> </div>
+      </div>
+    </div>
+    <!-- Input para llenar Fecha de ingreso -->
+    <div class="form-group row">
+      <label for="example-text-input" class="col-2 col-form-label">Fecha de Ingreso</label>
+      <div class="col-10">
+        <input class="form-control" name="FechaIngreso" placeholder="Fecha" [(ngModel)]="cliente.id" type="date" value="{{datos-empresa.FechaIngreso}}"
+          #fechavalidar="ngModel">
+          <!-- Ventana emergente -->
+        <div [hidden]="fechavalidar.valid || fechavalidar.pristine" class="alert alert-danger">
+            {{mostrarfecha}}
         </div>
+      </div>
+    </div>
 
-        <div class="col-10">
-          <button type="submit" class="btn btn-success" style="cursor: pointer;" [disabled]="!Enviar(datosempresaForm)">Enviar para aprobación</button>
-        </div>
+    <div class="col-10">
+      <button type="submit" class="btn btn-success" style="cursor: pointer;" [disabled]="!Enviar(datosempresaForm)">Enviar para aprobación</button>
+    </div>
 
 
 
 
 
-      </form>
-    </div>        
+  </form>
+</div>
