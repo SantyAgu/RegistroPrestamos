@@ -18,8 +18,7 @@ export class AppComponent implements OnInit {
   constructor(private _dataBaseService: DataBaseService) {}
   
 ngOnInit() {
-  const a =(this._dataBaseService.getClientes());
-  console.log(a);
+  
 
   }
 }
