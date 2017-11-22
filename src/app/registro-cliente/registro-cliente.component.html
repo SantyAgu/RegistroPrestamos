@@ -1,4 +1,30 @@
 <div class="container">
+    <ul class="nav nav-tabs">
+      <li data-toggle="tab" class="active" (click)="show(1)">
+        <a href="#">Inicio</a>
+      </li>
+      <li data-toggle="tab" (click)="show(2)">
+        <a routerLink="/Inicio"  routerLinkActive="active ">Registrarme</a>
+      </li>
+    </ul>
+  </div>
+  <div class="container" *ngIf="!regis">
+    <div class="form-group row {{clase_input}}">
+      <label for="example-text-input" class="col-2 col-form-label">Identificación*:</label>
+      <div class="col-10">
+        <input class="form-control" autocomplete="off" name="id" placeholder="Identificación" type="number" required pattern="[0-9]*"
+          [(ngModel)]="id" #input="ngModel" (keyup)="Validar(input)">
+        <div style="color:#a94442"> {{mostrarinput}}</div>
+      </div>
+  
+  
+    </div>
+    <div class="col-10">
+      <button type="button" class="btn btn-success" style="cursor: pointer;" [disabled]="!hability" (click)="enviar()">Enviar</button>
+    </div>
+  </div>
+
+<div class="container" *ngIf="regis">
 
   <form  #clienteForm="ngForm">
     <div class="form-group row">

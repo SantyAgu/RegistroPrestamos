@@ -146,7 +146,7 @@ export class RegistroClienteComponent implements OnInit {
   }
   enviar(){
     if (this.clienteverify.id==0) {
-      this.mostrarinput = "User no esta en bd";
+      this.mostrarinput = "Usuario no esta registrado.";
       this.clase_input = "has-danger"; 
       this.hability=false;    
     } else {
