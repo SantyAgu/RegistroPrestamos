@@ -31,6 +31,8 @@ export class RegistroClienteComponent implements OnInit {
 
 
   Enviar(form): boolean {
+    console.log(this.Returned);
+    
     this.validar = false;
     try {
       if (this.cliente.id > 0 && this.validacionID) {
@@ -111,7 +113,7 @@ export class RegistroClienteComponent implements OnInit {
     if (confirm("¿Desea guardar su registro?")) {
       if (this.validar) {
         this.Returned = this._dataBaseService.insertCliente(this.cliente)
-        let timer = Observable.timer(1000);
+        let timer = Observable.timer(2000);
         timer.subscribe(() => {
           this.Redirect();
         });
@@ -119,10 +121,11 @@ export class RegistroClienteComponent implements OnInit {
       else
         alert('Verifique los campos del formulario');
     }
+    
   }
 
   Redirect() {
-    if (this.Returned)
+    if (this.Returned || this.Returned == undefined)
       alert('Error al guardar el registro');
     else
       this._router.navigate(["Aprobacion/" + this.cliente.id]);

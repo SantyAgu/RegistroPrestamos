@@ -63,7 +63,7 @@ export class DataBaseService {
 
     let cl: Cliente;
     cl = new Cliente();
-    let url = "http://192.168.3.187:5000/select/" + id;
+    let url = "http://192.168.3.187:5001/select/" + id;
     this.http.get(url).subscribe(res => {
       let results;
       results = JSON.parse(res["_body"]).SQLreturn[0];
@@ -75,16 +75,17 @@ export class DataBaseService {
         cl.fechaNacimiento = results[0].cliente_FechaNacimiento;
       }
 
+      
 
-
-    });
+    },
+    err => console.log(err));
     return cl;
   }
 
 
   insertCliente(cl: Cliente) {
     let results;
-    let url = "http://192.168.3.187:5000/insert/" + cl.id + "/" + cl.nombre + "/" + cl.apellido + "/" + cl.fechaNacimiento;
+    let url = "http://192.168.3.187:5001/insert/" + cl.id + "/" + cl.nombre + "/" + cl.apellido + "/" + cl.fechaNacimiento;
     let sub = this.http.get(url).subscribe(data => {
       if (JSON.parse(data["_body"]).ERROR != undefined) {
 
@@ -94,6 +95,33 @@ export class DataBaseService {
 
         results = false;
       }
+    },
+    err => {
+      results = true;
+      console.log(results);
+      
+    });
+    return results;
+  }
+
+
+  insertarEmpresa(cl: Cliente,em:DatosEmpresa) {
+    let results;
+    let url = "http://192.168.3.187:5001/insert/" + cl.id + "/" + cl.nombre + "/" + cl.apellido + "/" + cl.fechaNacimiento;
+    let sub = this.http.get(url).subscribe(data => {
+      if (JSON.parse(data["_body"]).ERROR != undefined) {
+
+        results = true;
+      }
+      else {
+
+        results = false;
+      }
+    },
+    err => {
+      results = true;
+      console.log(results);
+      
     });
     return results;
   }
