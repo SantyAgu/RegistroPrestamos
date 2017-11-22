@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {DatosEmpresa} from '../model/DatosEmpresa/datos-empresa';
+import { DatosEmpresa } from '../model/DatosEmpresa/datos-empresa';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Cliente } from '../model/Clientes/cliente';
 import { DataBaseService } from '../services/data-base/data-base.service'
@@ -10,142 +10,163 @@ import { DataBaseService } from '../services/data-base/data-base.service'
   styleUrls: ['./aprobacion-cliente.component.css']
 })
 export class AprobacionClienteComponent implements OnInit {
-  datos_empresa: DatosEmpresa= new DatosEmpresa();
+  datos_empresa: DatosEmpresa = new DatosEmpresa();
   cliente: Cliente;
-  clienteId:number;
-  validar=[false,false,false,false];
-  mostrarnsalario;mostrarnit;mostrarFecha;mostrarmonbre;
-  clase_salario;clase_nit;clase_nom;clase_fec;
-  fechaHoy = new Date().getFullYear() + "-" + (new Date().getMonth() +1) + "-" +(new Date().getDate()-1);
-  fecha = (new Date().getFullYear() - 1) + "-" + (new Date().getMonth() -5) + "-" + new Date().getDate();
-  
+  //variable que recibe de registro
+  clienteId: number;
+  //validaciones de los campos 
+  validar = [false, false, false, false];
+  //variables para mostrar error
+  mostrarnsalario; mostrarnit; mostrarFecha; mostrarmonbre;
+  //variables para mostrar error en las clases
+  clase_salario; clase_nit; clase_nom; clase_fec;
+  //captura la fecha de hoy 
+  fechaHoy = new Date().getFullYear() + "-" + (new Date().getMonth() + 1) + "-" + (new Date().getDate() - 1);
+  //imprime el resultado de aprobecion
+  resulta; ob;
+
 
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private _dataBaseService: DataBaseService)
-     { }
+    private _dataBaseService: DataBaseService) { }
 
-  
+
 
   ngOnInit() {
+    //captura los datos de registro
     this.route.params.subscribe(params => {
-      if(params['id']!=null){
-          this.clienteId = +params['id']; 
-          this.cliente = this._dataBaseService.getClienteID(this.clienteId);
-          console.log(this.cliente);
-          console.log(this.clienteId);
-         
+      if (params['id'] != null) {
+        this.clienteId = +params['id'];
+        //consulta de la bd con el dato mandado desde resgistro 
+        this.cliente = this._dataBaseService.getClienteID(this.clienteId);
       }
-      
-   });
+    });
   }
-
-  valdarNombre(input){
+  //validacion campo nombre
+  valdarNombre(input) {
     console.log(input.value);
-    if (input.value==undefined||input.value=="") {
-      this.clase_nom="has-danger";
-      this.mostrarmonbre="No se permiten el campo vacio.";
-      this.validar[0]=false;
-    }else{
-      this.clase_nom="has-success";
-      this.mostrarmonbre="";
-      this.validar[0]=true;
+    if (input.value == undefined || input.value == "") {
+      this.clase_nom = "has-danger";
+      this.mostrarmonbre = "No se permiten el campo vacio.";
+      this.validar[0] = false;
+    } else {
+      this.clase_nom = "has-success";
+      this.mostrarmonbre = "";
+      this.validar[0] = true;
     }
     console.log("--------");
-    this.validar.forEach(valor => {console.log("esto es 'valor': "+valor);});
+    this.validar.forEach(valor => { console.log("esto es 'valor': " + valor); });
   }
-
-  ValidarNit(input){    
-    if (input.value=="undefined"||input.value==null) {
-      if (input.value==null) {
-        this.clase_nit="has-danger";
-        this.mostrarnit="No se permiten caracteres especiales ni el campo vacio.";
-        this.validar[1]=false;
+  //validacion campo nit
+  ValidarNit(input) {
+    if (input.value == "undefined" || input.value == null) {
+      if (input.value == null) {
+        this.clase_nit = "has-danger";
+        this.mostrarnit = "No se permiten caracteres especiales ni el campo vacio.";
+        this.validar[1] = false;
       } else {
-        this.clase_nit="";
-        this.mostrarnit="";
-        this.validar[1]=false;
-      }      
+        this.clase_nit = "";
+        this.mostrarnit = "";
+        this.validar[1] = false;
+      }
     } else {
       if (!input.pristine) {
         if (input.valid) {
-          this.mostrarnit="";
-          this.clase_nit="has-success";
-          this.validar[1]=true;
+          this.mostrarnit = "";
+          this.clase_nit = "has-success";
+          this.validar[1] = true;
         } else {
-          this.clase_nit="has-danger";
-          this.mostrarnit="Dato ingresado no es correcto.";
-          this.validar[1]=false;
-        }      
+          this.clase_nit = "has-danger";
+          this.mostrarnit = "Dato ingresado no es correcto.";
+          this.validar[1] = false;
+        }
       } else {
-        this.clase_nit="has-danger";
-        this.mostrarnit="campo esta vacio.";
-        this.validar[1]=false;
-      }      
-    } 
+        this.clase_nit = "has-danger";
+        this.mostrarnit = "campo esta vacio.";
+        this.validar[1] = false;
+      }
+    }
     console.log("--------");
-    this.validar.forEach(valor => {console.log("esto es 'valor': "+valor);});
+    this.validar.forEach(valor => { console.log("esto es 'valor': " + valor); });
   }
+  //validacion campo salario
+  Validarsalario(input) {
+    if (this.datos_empresa.salario != null) {
 
-  salario(input){   
-
-    if (this.datos_empresa.salario!=null) {
-      if (this.datos_empresa.salario<=800000) {
-        this.clase_salario="has-danger";
-        this.mostrarnsalario="Salario debe ser mayor a $800.000.";
-        this.validar[2]=false;        
+      if (this.datos_empresa.salario > 100000000) {
+        this.mostrarnsalario = "El Salario no puede ser superior a $100.000.000";
+        this.clase_salario = "has-danger";
+        this.validar[2] = false;
       } else {
-        if (this.datos_empresa.salario>100000000) {
-          this.mostrarnsalario="El Salario es Superior a $100.000.000";
-          this.clase_salario="has-danger";
-          this.validar[2]=false;
-        } else {
-          this.mostrarnsalario="";
-          this.clase_salario="has-success";
-          this.validar[2]=true;
-        }        
+        this.mostrarnsalario = "";
+        this.clase_salario = "has-success";
+        this.validar[2] = true;
       }
     } else {
-      this.clase_salario="";
-      this.mostrarnsalario="";
-      this.validar[2]=false;
+      this.clase_salario = "has-danger";
+      this.mostrarnsalario = "El dato ingresado no es valido.";
+      this.validar[2] = false;
     }
-    console.log("--------");
-    this.validar.forEach(valor => {console.log("esto es 'valor': "+valor);});
   }
+  //validacion campo fecha
+  validarFecha(input) {
 
-  validarFecha(input){
-    console.log(new Date(input.value));
-    if (input.value=="undefined"||input.value==null) {
-      this.clase_fec="";
-      this.mostrarFecha="";
-      this.validar[3]=false;
+    if (input.value == "undefined" || input.value == null) {
+      this.clase_fec = "";
+      this.mostrarFecha = "";
+      this.validar[3] = false;
     } else {
-      if (new Date(input.value)<new Date(this.fechaHoy)) {
-        this.clase_fec="has-success";
-        this.mostrarFecha="";
-        this.validar[3]=true;
+      if (new Date(input.value) < new Date(this.fechaHoy)) {
+        this.clase_fec = "has-success";
+        this.mostrarFecha = "";
+        this.validar[3] = true;
       } else {
-        this.clase_fec="has-danger";
-        this.mostrarFecha="fecha no valida.";
-        this.validar[3]=false;
-      }      
+        this.clase_fec = "has-danger";
+        this.mostrarFecha = "fecha no valida.";
+        this.validar[3] = false;
+      }
     }
-    console.log("--------");
-    this.validar.forEach(valor => {console.log("esto es 'valor': "+valor);});
-  }
 
-  enviar():boolean{ 
-    let btn= true; 
+    console.log("esto es this.datos_empresa.FechaIngreso: " + this.datos_empresa.FechaIngreso);
+
+
+  }
+  //validacion btn enviar aprobacion
+  enviar(): boolean {
+    let btn = true;
     this.validar.forEach(valor => {
-      if (valor==false) {
-        btn= false;
-      } 
+      if (valor == false) {
+        btn = false;
+      }
     });
-    return btn;
+    return true;
   }
-
+  //calcular las varibles para aprobacion 
+  aprobacion() {
+    if (new Date(this.datos_empresa.FechaIngreso) >= (new Date((new Date().getFullYear() - 1) + "-" + (new Date().getMonth() - 5) + "-" + new Date().getDate()))) {
+      this.resulta = "Desfavorable.";
+      this.ob = "Lo sentimos la antiguedad no es valida";     
+    } else {
+      if (this.datos_empresa.salario <= 800000) {        
+        this.resulta = "Desfavorable.";
+        this.ob = "El salario ingresado es inferior a $800.000.";        
+      } else {
+        if (this.datos_empresa.salario<=1000000) {
+          this.resulta = "Favorable.";
+          this.ob = "le informamos que el cupo maximo aprobado es $5.000.000";
+        } else {
+          if (this.datos_empresa.salario<=4000000) {
+            this.resulta = "Favorable.";
+            this.ob = "le informamos que el cupo maximo aprobado es $20.000.000";
+          } else {
+            this.resulta = "Favorable.";
+            this.ob = "le informamos que el cupo maximo aprobado es $50.000.000";
+          }          
+        }        
+      }
+    }
+  }
 
 
 }
