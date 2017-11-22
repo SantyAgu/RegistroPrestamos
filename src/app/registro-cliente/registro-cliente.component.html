@@ -11,7 +11,7 @@
         <input class="form-control"
         autocomplete="off"
        name="id" placeholder="Identificación" [(ngModel)]="cliente.id" type="number" 
-          #idvalidar="ngModel"  required pattern="[0-9]*" (keyup)="ExisteId(idvalidar)">
+          #idvalidar="ngModel"  required pattern="[0-9]*"  (keyup)="ExisteId(idvalidar)" (change)="ExisteId(idvalidar)">
          
         
           <div [hidden]="idvalidar.valid || idvalidar.pristine " style="color: #a94442;">
