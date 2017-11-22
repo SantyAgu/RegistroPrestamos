@@ -43,6 +43,7 @@ export class AprobacionClienteComponent implements OnInit {
       }
     });
   }
+
   //validacion campo nombre
   valdarNombre(input) {
     console.log(input.value);
@@ -54,10 +55,9 @@ export class AprobacionClienteComponent implements OnInit {
       this.clase_nom = "has-success";
       this.mostrarmonbre = "";
       this.validar[0] = true;
-    }
-    console.log("--------");
-    this.validar.forEach(valor => { console.log("esto es 'valor': " + valor); });
+    }   
   }
+
   //validacion campo nit
   ValidarNit(input) {
     if (input.value == "undefined" || input.value == null) {
@@ -87,9 +87,9 @@ export class AprobacionClienteComponent implements OnInit {
         this.validar[1] = false;
       }
     }
-    console.log("--------");
-    this.validar.forEach(valor => { console.log("esto es 'valor': " + valor); });
+    
   }
+
   //validacion campo salario
   Validarsalario(input) {
     if (this.datos_empresa.salario != null) {
@@ -109,6 +109,7 @@ export class AprobacionClienteComponent implements OnInit {
       this.validar[2] = false;
     }
   }
+
   //validacion campo fecha
   validarFecha(input) {
 
@@ -127,11 +128,8 @@ export class AprobacionClienteComponent implements OnInit {
         this.validar[3] = false;
       }
     }
-
-    console.log("esto es this.datos_empresa.FechaIngreso: " + this.datos_empresa.FechaIngreso);
-
-
   }
+
   //validacion btn enviar aprobacion
   enviar(): boolean {
     let btn = true;
@@ -140,8 +138,9 @@ export class AprobacionClienteComponent implements OnInit {
         btn = false;
       }
     });
-    return true;
+    return btn;
   }
+
   //calcular las varibles para aprobacion 
   aprobacion() {
     if (new Date(this.datos_empresa.FechaIngreso) >= (new Date((new Date().getFullYear() - 1) + "-" + (new Date().getMonth() - 5) + "-" + new Date().getDate()))) {
