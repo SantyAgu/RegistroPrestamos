@@ -110,7 +110,7 @@ export class RegistroClienteComponent implements OnInit {
   guardar() {
     if (confirm("¿Desea guardar su registro?")) {
       if (this.validar) {
-        (this._dataBaseService.insertCliente(this.cliente));
+       this.Returned = (this._dataBaseService.insertCliente(this.cliente));
         let timer = Observable.timer(2000);
         timer.subscribe(() => {
           this.Redirect();
