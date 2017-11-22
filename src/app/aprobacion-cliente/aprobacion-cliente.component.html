@@ -42,7 +42,8 @@
     </div>
     <!-- Btn Enviar para aprobación -->
     <div class="col-10">
-      <button type="submit" class="btn btn-success" style="cursor: pointer;"(click)="aprobacion()" [disabled]="!enviar()" data-toggle="modal" data-target="#myModal">Enviar para aprobación</button>
+      <button type="submit" class="btn btn-success" style="cursor: pointer;" (click)="aprobacion()" [disabled]="!enviar()" data-toggle="modal"
+        data-target="#myModal">Enviar para aprobación</button>
     </div>
 
   </form>
@@ -58,9 +59,11 @@
           <h4 class="modal-title">Resultado de la aprobacion del credito.</h4>
         </div>
         <div class="modal-body">
-          <p>Apreciado cliente {{cliente.nombre}} {{cliente.apellido}}, gracias por contar con nostros para su credito.</p>         
-          
-          <p> El resultado de la solicitud es: <strong >{{resulta}}</strong>  </p>
+          <p>Apreciado cliente {{cliente.nombre}} {{cliente.apellido}}, gracias por contar con nostros para su credito.</p>
+
+          <p> El resultado de la solicitud es:
+            <strong>{{resulta}}</strong>
+          </p>
           <h5>Observaciones:</h5>
           <p>{{ob}}</p>
         </div>
@@ -71,3 +74,4 @@
 
     </div>
   </div>
+</div>
