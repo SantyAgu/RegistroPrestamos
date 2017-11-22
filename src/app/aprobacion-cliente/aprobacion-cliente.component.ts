@@ -143,7 +143,7 @@ export class AprobacionClienteComponent implements OnInit {
 
   //calcular las varibles para aprobacion 
   aprobacion() {
-    
+    this.Guardar();
     if (new Date(this.datos_empresa.FechaIngreso) >= (new Date((new Date().getFullYear() - 1) + "-" + (new Date().getMonth() - 5) + "-" + new Date().getDate()))) {
       this.resulta = "Desfavorable.";
       this.ob = "Lo sentimos la antiguedad no es valida";    
@@ -171,5 +171,9 @@ export class AprobacionClienteComponent implements OnInit {
     }
   }
 
-
+  Guardar(){
+    if (this.enviar()){
+      this._dataBaseService.insertarEmpresa(this.cliente,this.datos_empresa);
+    }
+  }
 }

@@ -112,8 +112,6 @@ export class DataBaseService {
   insertarEmpresa(cl: Cliente, em: DatosEmpresa) {
     let results = new Cliente();
     let url = "http://192.168.3.187:5000/update/" + encodeURIComponent(cl.id.toString()) + "/" + encodeURIComponent(em.NombreEmpresa) + "/" + encodeURIComponent(em.NIT.toString()) + "/" + encodeURIComponent(em.salario.toString()) + "/" + encodeURIComponent(em.FechaIngreso.toString());
-    url=encodeURIComponent(url);
-    
     let sub = this.http.get(url).subscribe(data => {
       if (JSON.parse(data["_body"]).ERROR != undefined) {
 
