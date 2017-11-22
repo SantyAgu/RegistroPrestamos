@@ -11,10 +11,10 @@ import {AprobacionClienteComponent} from './aprobacion-cliente/aprobacion-client
 
 
 const appRoutes: Routes = [
-  { path: 'registroCliente', component: RegistroClienteComponent },
+  { path: 'Inicio', component: RegistroClienteComponent },
   { path: 'Aprobacion/:id',  component: AprobacionClienteComponent },  
   { path: '',
-    redirectTo: '/registroCliente',
+    redirectTo: '/Inicio',
     pathMatch: 'full'
   },
   { path: '**', component: RegistroClienteComponent }

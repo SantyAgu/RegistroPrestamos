@@ -19,6 +19,9 @@ export class RegistroClienteComponent implements OnInit {
   validar: boolean = false;
   validacionID: boolean = false;
   Returned: Cliente = new Cliente();
+  regis: boolean=false ;
+  id;hability:boolean=false;
+  mostrarinput;clase_input;
 
 
   //minDate =;  
@@ -28,8 +31,6 @@ export class RegistroClienteComponent implements OnInit {
       this.Intervalo();
     });
   }
-
-
 
   Enviar(form): boolean {
     this.validar = false;
@@ -48,8 +49,6 @@ export class RegistroClienteComponent implements OnInit {
     return this.validar;
   }
 
-
-
   Intervalo() {
     if (this.clienteverify.id == 0)
       this.validacionID = true;
@@ -59,10 +58,6 @@ export class RegistroClienteComponent implements OnInit {
 
     return this.validacionID;
   }
-
-
-
-
 
   ChangeClassID(val) {
     if (!val.pristine) {
@@ -104,7 +99,7 @@ export class RegistroClienteComponent implements OnInit {
   }
 
   ExisteId(id) {
-    this.clienteverify = this._dataBaseService.getClienteID(id.model);
+    this.clienteverify = this._dataBaseService.getClienteID(this.cliente.id);
     (console.log(this.clienteverify));
   }
   guardar() {
@@ -126,6 +121,39 @@ export class RegistroClienteComponent implements OnInit {
       alert('Error al guardar el registro');
     else
       this._router.navigate(["Aprobacion/" + this.cliente.id]);
+  }
+
+  show(val:number) {
+    
+    if (val==1) {
+      this.regis = false;
+    } else {
+      this.regis = true;
+    }
+  }
+  Validar(input){   
+      if (input.valid) {
+        this.hability=true;
+        this.mostrarinput = "";
+        this.clase_input = "has-success";
+        this.clienteverify = this._dataBaseService.getClienteID(this.id);
+        
+      } else {
+        this.hability=false;
+        this.mostrarinput = "Dato no es valido";
+        this.clase_input = "has-danger";        
+      }
+  }
+  enviar(){
+    if (this.clienteverify.id==0) {
+      this.mostrarinput = "User no esta en bd";
+      this.clase_input = "has-danger"; 
+      this.hability=false;    
+    } else {
+      this.regis=true;
+      this._router.navigate(["Aprobacion/" + this.clienteverify.id]);
+    }
+
   }
 
 
