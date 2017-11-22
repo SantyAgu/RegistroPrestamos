@@ -45,6 +45,7 @@ export class DataBaseService {
     let de: DatosEmpresa;
     de = new DatosEmpresa();
     let url = "http://192.168.3.187:5000/select/" + id;
+    url=encodeURIComponent(url);
     this.http.get(url).subscribe(data => {
 
       results = JSON.parse(data["_body"]).SQLreturn[0];
@@ -63,7 +64,7 @@ export class DataBaseService {
 
     let cl: Cliente;
     cl = new Cliente();
-    let url = "http://192.168.3.187:5000/select/" + id;
+    let url = "http://192.168.3.187:5000/select/" + encodeURIComponent(id.toString());
     this.http.get(url).subscribe(res => {
       let results;
       results = JSON.parse(res["_body"]).SQLreturn[0];
@@ -86,7 +87,7 @@ export class DataBaseService {
   insertCliente(cl: Cliente) {
     let results;
     results = new Cliente();
-    let url = "http://192.168.3.187:5000/insert/" + cl.id + "/" + cl.nombre + "/" + cl.apellido + "/" + cl.fechaNacimiento;
+    let url = "http://192.168.3.187:5000/insert/" + encodeURIComponent(cl.id.toString()) + "/" + encodeURIComponent(cl.nombre) + "/" +encodeURIComponent( cl.apellido) + "/" + encodeURIComponent(cl.fechaNacimiento.toString());
     let sub = this.http.get(url).subscribe(data => {
       if (JSON.parse(data["_body"]).ERROR != undefined) {
 
@@ -110,8 +111,8 @@ export class DataBaseService {
 
   insertarEmpresa(cl: Cliente, em: DatosEmpresa) {
     let results = new Cliente();
-    let url = "http://192.168.3.187:5000/update/" + cl.id + "/" + em.NombreEmpresa + "/" + em.NIT + "/" + em.salario + "/" + em.FechaIngreso;
-    console.log(url);
+    let url = "http://192.168.3.187:5000/update/" + encodeURIComponent(cl.id.toString()) + "/" + encodeURIComponent(em.NombreEmpresa) + "/" + encodeURIComponent(em.NIT.toString()) + "/" + encodeURIComponent(em.salario.toString()) + "/" + encodeURIComponent(em.FechaIngreso.toString());
+    url=encodeURIComponent(url);
     
     let sub = this.http.get(url).subscribe(data => {
       if (JSON.parse(data["_body"]).ERROR != undefined) {

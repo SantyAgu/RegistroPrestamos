@@ -1,5 +1,6 @@
 var express = require('express');
 var app = express();
+var urlencode = require('urlencode');
 
 
 var sql = require("mssql");
@@ -43,7 +44,7 @@ app.get('/select/:ID', function (req, res) {
     res.setHeader('Access-Control-Allow-Origin', '*');
     sql.connect(config,function (err) {
         request = new sql.Request();
-        request.query('select * from dbo.Cliente where pk_cliente_id =' + req.params.ID, function (err, recordset) {
+        request.query('select * from dbo.Cliente where pk_cliente_id =' + urlencode.decode(req.params.ID), function (err, recordset) {
             sql.close();
             if (err)
                 res.json({
@@ -64,7 +65,7 @@ app.get('/insert/:ID/:Nombre/:Apellido/:Fecha', function (req, res) {
     sql.connect(config,function (err) {
         request = new sql.Request();
         try {
-            request.query('insert into Cliente values (' + req.params.ID + ',\'' + req.params.Nombre + '\',\'' + req.params.Apellido + '\',\'' + req.params.Fecha + '\',NULL,NULL,NULL,NULL)', function (err, recordset) {
+            request.query('insert into Cliente values (' + urlencode.decode(req.params.ID) + ',\'' + urlencode.decode(req.params.Nombre) + '\',\'' + urlencode.decode(req.params.Apellido) + '\',\'' + urlencode.decode(req.params.Fecha) + '\',NULL,NULL,NULL,NULL)', function (err, recordset) {
                 sql.close();
                 if (err)
                     res.json({
@@ -91,7 +92,7 @@ app.get('/update/:ID/:NombreEmp/:NIT/:Salario/:Fecha', function (req, res) {
     sql.connect(config,function (err) {
         request = new sql.Request();
         try {
-            request.query('update Cliente set cliente_NombreDeEmpresa=\'' + req.params.NombreEmp +'\', cliente_NIT = ' + req.params.NIT + ', cliente_Salario = ' + req.params.Salario +', cliente_FechaDeIngreso = \''+ req.params.Fecha +'\'  where pk_cliente_id = ' +  req.params.ID, function (err, recordset) {
+            request.query('update Cliente set cliente_NombreDeEmpresa=\'' + urlencode.decode(req.params.NombreEmp) +'\', cliente_NIT = ' + urlencode.decode(req.params.NIT) + ', cliente_Salario = ' + urlencode.decode(req.params.Salario) +', cliente_FechaDeIngreso = \''+ urlencode.decode(req.params.Fecha) +'\'  where pk_cliente_id = ' +  urlencode.decode(req.params.ID), function (err, recordset) {
                 sql.close();
                 if (err)
                     res.json({
