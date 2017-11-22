@@ -7,7 +7,9 @@
       <label for="example-text-input" class="col-2 col-form-label">Nombre Empresa</label>
       <div class="col-10">
         <input class="form-control" name="nombEmpreValidar" placeholder="Nombre de la empresa" [(ngModel)]="datos_empresa.NombreEmpresa"
-          type="text" #nombEmpreValidar="ngModel" required pattern="[A-Z,a-z,0-9,\s]*" (keyup)="valdarNombre(nombEmpreValidar)"> {{mostrarmonbre}}
+          type="text" #nombEmpreValidar="ngModel" required pattern="[A-Z,a-z,0-9,\s]*" (keyup)="valdarNombre(nombEmpreValidar)">
+          <div style="color:#a94442"> {{mostrarmonbre}}</div>
+          
 
       </div>
     </div>
@@ -42,8 +44,7 @@
     </div>
     <!-- Btn Enviar para aprobación -->
     <div class="col-10">
-      <button type="submit" class="btn btn-success" style="cursor: pointer;" (click)="aprobacion()" [disabled]="!enviar()" data-toggle="modal"
-        data-target="#myModal">Enviar para aprobación</button>
+      <button type="submit" class="btn btn-success" style="cursor: pointer;" (click)="aprobacion()" [disabled]="!enviar()" data-toggle="modal"  data-target="#myModal">Enviar para aprobación</button>
     </div>
 
   </form>
@@ -62,7 +63,7 @@
           <p>Apreciado cliente {{cliente.nombre}} {{cliente.apellido}}, gracias por contar con nostros para su credito.</p>
 
           <p> El resultado de la solicitud es:
-            <strong>{{resulta}}</strong>
+            <strong class="{{color}}">{{resulta}}</strong>
           </p>
           <h5>Observaciones:</h5>
           <p>{{ob}}</p>

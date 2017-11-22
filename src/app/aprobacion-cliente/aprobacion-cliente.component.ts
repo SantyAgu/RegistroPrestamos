@@ -23,7 +23,7 @@ export class AprobacionClienteComponent implements OnInit {
   //captura la fecha de hoy 
   fechaHoy = new Date().getFullYear() + "-" + (new Date().getMonth() + 1) + "-" + (new Date().getDate() - 1);
   //imprime el resultado de aprobecion
-  resulta; ob;
+  resulta; ob;color;
 
 
   constructor(
@@ -143,17 +143,21 @@ export class AprobacionClienteComponent implements OnInit {
 
   //calcular las varibles para aprobacion 
   aprobacion() {
+    
     if (new Date(this.datos_empresa.FechaIngreso) >= (new Date((new Date().getFullYear() - 1) + "-" + (new Date().getMonth() - 5) + "-" + new Date().getDate()))) {
       this.resulta = "Desfavorable.";
-      this.ob = "Lo sentimos la antiguedad no es valida";     
+      this.ob = "Lo sentimos la antiguedad no es valida";    
+      this.color = "rojo"; 
     } else {
       if (this.datos_empresa.salario <= 800000) {        
         this.resulta = "Desfavorable.";
-        this.ob = "El salario ingresado es inferior a $800.000.";        
+        this.ob = "El salario ingresado es inferior a $800.000.";  
+        this.color = "rojo";       
       } else {
+        this.color = "verde";
         if (this.datos_empresa.salario<=1000000) {
           this.resulta = "Favorable.";
-          this.ob = "le informamos que el cupo maximo aprobado es $5.000.000";
+          this.ob = "le informamos que el cupo maximo aprobado es $5.000.000";          
         } else {
           if (this.datos_empresa.salario<=4000000) {
             this.resulta = "Favorable.";
