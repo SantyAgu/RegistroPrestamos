@@ -14,10 +14,10 @@
           #idvalidar="ngModel"  required pattern="[0-9]*" (keyup)="ExisteId(idvalidar)">
          
         
-          <div [hidden]="idvalidar.valid || idvalidar.pristine " class="alert alert-danger">
+          <div [hidden]="idvalidar.valid || idvalidar.pristine " style="color: #a94442;">
             La identificación es requerida
           </div>
-          <div   [hidden]="Intervalo() || !idvalidar.valid " class="alert alert-danger">
+          <div   [hidden]="Intervalo() || !idvalidar.valid " style="color: #a94442;">
             La identificación ya existe en la base de datos 
           </div>
       </div>
@@ -30,10 +30,10 @@
       <div class="col-10">
         <input class="form-control" name="name" placeholder="Nombre" [(ngModel)]="cliente.nombre" type="text"
           #nombrevalidar="ngModel" required pattern="[ñA-Z,ña-z,\s]*">
-        <div [hidden]=" !(cliente.nombre=='') || nombrevalidar.pristine" class="alert alert-danger">
+        <div [hidden]=" !(cliente.nombre=='') || nombrevalidar.pristine" style="color: #a94442;">
           El nombre es requerido
         </div>
-        <div [hidden]="nombrevalidar.valid || nombrevalidar.pristine || cliente.nombre==''" class="alert alert-danger">
+        <div [hidden]="nombrevalidar.valid || nombrevalidar.pristine || cliente.nombre==''" style="color: #a94442;">
           El nombre no es válido
         </div>
       </div>
@@ -45,10 +45,10 @@
         <input class="form-control" name="apellido" placeholder="Apellido" [(ngModel)]="cliente.apellido" type="text" 
           #apellidovalidar="ngModel" required pattern="[ñA-Z,ña-z,\s]*">
 
-        <div [hidden]=" !(cliente.apellido=='') || apellidovalidar.pristine " class="alert alert-danger">
+        <div [hidden]=" !(cliente.apellido=='') || apellidovalidar.pristine " style="color: #a94442;">
           El apellido es requerido
         </div>
-        <div [hidden]="apellidovalidar.valid || apellidovalidar.pristine || cliente.apellido=='' " class="alert alert-danger">
+        <div [hidden]="apellidovalidar.valid || apellidovalidar.pristine || cliente.apellido=='' " style="color: #a94442;">
           El apellido no es válido
         </div>
 
@@ -64,7 +64,7 @@
         <input  class="form-control" name="fechaNacimiento" placeholder="Fecha de Nacimiento" [(ngModel)]="cliente.fechaNacimiento"
           type="date" max="{{fecha}}" value="" #fechavalidar="ngModel" required>
 
-          <div   [hidden]="!(cliente.fechaNacimiento.toString()>fecha)   || fechavalidar.pristine" class="alert alert-danger">
+          <div   [hidden]="!(cliente.fechaNacimiento.toString()>fecha)   || fechavalidar.pristine" style="color: #a94442;">
             Debe ser mayor a 18 años 
           </div>
       </div>
