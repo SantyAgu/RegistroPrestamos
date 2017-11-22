@@ -10,14 +10,14 @@
       <div class="col-10">
         <input class="form-control"
         autocomplete="off"
-       name="id" placeholder="Idetificación" [(ngModel)]="cliente.id" type="number" value="{{cliente.id}}"
-          #idvalidar="ngModel" required pattern="[0-9]*" (keyup)="ExisteId(idvalidar)">
+       name="id" placeholder="Identificación" [(ngModel)]="cliente.id" type="number" 
+          #idvalidar="ngModel"  required pattern="[0-9]*" (keyup)="ExisteId(idvalidar)">
          
         
           <div [hidden]="idvalidar.valid || idvalidar.pristine " class="alert alert-danger">
             La identificación es requerida
           </div>
-          <div   [hidden]="Intervalo(t) || !idvalidar.valid " class="alert alert-danger">
+          <div   [hidden]="Intervalo() || !idvalidar.valid " class="alert alert-danger">
             La identificación ya existe en la base de datos 
           </div>
       </div>
@@ -28,9 +28,9 @@
     <div [class]= " ChangeClassNames(nombrevalidar) ">
       <label for="example-search-input" class="col-2 col-form-label">Nombres*:</label>
       <div class="col-10">
-        <input class="form-control" name="name" placeholder="Nombre" [(ngModel)]="cliente.nombre" type="text" value="{{cliente.nombre}}"
-          #nombrevalidar="ngModel" required pattern="[A-Z,a-z,\s]*">
-        <div [hidden]=" !cliente.nombre=='' || nombrevalidar.pristine" class="alert alert-danger">
+        <input class="form-control" name="name" placeholder="Nombre" [(ngModel)]="cliente.nombre" type="text"
+          #nombrevalidar="ngModel" required pattern="[ñA-Z,ña-z,\s]*">
+        <div [hidden]=" !(cliente.nombre=='') || nombrevalidar.pristine" class="alert alert-danger">
           El nombre es requerido
         </div>
         <div [hidden]="nombrevalidar.valid || nombrevalidar.pristine || cliente.nombre==''" class="alert alert-danger">
@@ -42,10 +42,10 @@
     <div [class]= " ChangeClassNames(apellidovalidar) ">
       <label for="example-search-input" class="col-2 col-form-label">Apellidos*:</label>
       <div class="col-10">
-        <input class="form-control" name="apellido" placeholder="Apellido" [(ngModel)]="cliente.apellido" type="text" value="{{cliente.apellido}}"
-          #apellidovalidar="ngModel" required pattern="[A-Z,a-z,\s]*">
+        <input class="form-control" name="apellido" placeholder="Apellido" [(ngModel)]="cliente.apellido" type="text" 
+          #apellidovalidar="ngModel" required pattern="[ñA-Z,ña-z,\s]*">
 
-        <div [hidden]=" !cliente.apellido=='' || apellidovalidar.pristine " class="alert alert-danger">
+        <div [hidden]=" !(cliente.apellido=='') || apellidovalidar.pristine " class="alert alert-danger">
           El apellido es requerido
         </div>
         <div [hidden]="apellidovalidar.valid || apellidovalidar.pristine || cliente.apellido=='' " class="alert alert-danger">
@@ -62,9 +62,9 @@
       <div class="col-10">
 
         <input  class="form-control" name="fechaNacimiento" placeholder="Fecha de Nacimiento" [(ngModel)]="cliente.fechaNacimiento"
-          type="date" max="{{fecha}}" value="{{igual}}" #fechavalidar="ngModel" required>
+          type="date" max="{{fecha}}" value="" #fechavalidar="ngModel" required>
 
-          <div   [hidden]="!(cliente.fechaNacimiento>fecha)   || fechavalidar.pristine" class="alert alert-danger">
+          <div   [hidden]="!(cliente.fechaNacimiento.toString()>fecha)   || fechavalidar.pristine" class="alert alert-danger">
             Debe ser mayor a 18 años 
           </div>
       </div>

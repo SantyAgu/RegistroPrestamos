@@ -2,9 +2,7 @@ import { Injectable } from '@angular/core';
 import { Http, Response, Headers, URLSearchParams, RequestOptions } from '@angular/http';
 import { Cliente } from '../../model/Clientes/cliente'
 import { DatosEmpresa } from '../../model/DatosEmpresa/datos-empresa'
-import { bindCallback } from 'rxjs/observable/bindCallback';
 import { Observable } from 'rxjs/Observable';
-import 'rxjs/add/operator/map'
 @Injectable()
 
 

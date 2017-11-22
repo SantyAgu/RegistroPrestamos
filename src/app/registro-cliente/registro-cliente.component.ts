@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Cliente } from '../model/Clientes/cliente';
 import { DataBaseService } from '../services/data-base/data-base.service'
 import { RouterModule, Routes, Router } from '@angular/router';
-import { Observable } from 'rxjs/Rx';
+import "rxjs/Rx";
+  import { Observable } from 'rxjs/Observable';
 
 @Component({
   selector: 'app-registro-cliente',
@@ -33,7 +34,7 @@ export class RegistroClienteComponent implements OnInit {
     this.validar = false;
     try {
       if (this.cliente.id > 0 && this.validacionID) {
-        if (this.cliente.nombre != "" && form._directives[1].valid) {
+        if ((this.cliente.nombre != "" && form._directives[1].valid)) {
           if (this.cliente.nombre != "" && form._directives[2].valid) {
             if (new Date(this.cliente.fechaNacimiento) < new Date(this.fecha))
               this.validar = true;
