@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Cliente } from '../model/Clientes/cliente';
+import { DatosEmpresa } from '../model/DatosEmpresa/datos-empresa';
 import { DataBaseService } from '../services/data-base/data-base.service'
 import { RouterModule, Routes, Router } from '@angular/router';
 import "rxjs/Rx";
@@ -17,7 +18,7 @@ export class RegistroClienteComponent implements OnInit {
   fecha = (new Date().getFullYear() - 18) + "-" + (new Date().getMonth() + 1) + "-" + new Date().getDate();
   validar: boolean = false;
   validacionID: boolean = false;
-  Returned: boolean = true;
+  Returned: Cliente = new Cliente();
 
 
   //minDate =;  
@@ -31,8 +32,6 @@ export class RegistroClienteComponent implements OnInit {
 
 
   Enviar(form): boolean {
-    console.log(this.Returned);
-    
     this.validar = false;
     try {
       if (this.cliente.id > 0 && this.validacionID) {
@@ -108,11 +107,10 @@ export class RegistroClienteComponent implements OnInit {
     this.clienteverify = this._dataBaseService.getClienteID(id.model);
     (console.log(this.clienteverify));
   }
-
   guardar() {
     if (confirm("¿Desea guardar su registro?")) {
       if (this.validar) {
-        this.Returned = this._dataBaseService.insertCliente(this.cliente)
+        (this._dataBaseService.insertCliente(this.cliente));
         let timer = Observable.timer(2000);
         timer.subscribe(() => {
           this.Redirect();
@@ -121,11 +119,10 @@ export class RegistroClienteComponent implements OnInit {
       else
         alert('Verifique los campos del formulario');
     }
-    
   }
 
   Redirect() {
-    if (this.Returned || this.Returned == undefined)
+    if (this.Returned.id ==0)
       alert('Error al guardar el registro');
     else
       this._router.navigate(["Aprobacion/" + this.cliente.id]);

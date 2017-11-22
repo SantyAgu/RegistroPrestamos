@@ -63,7 +63,7 @@ export class DataBaseService {
 
     let cl: Cliente;
     cl = new Cliente();
-    let url = "http://192.168.3.187:5001/select/" + id;
+    let url = "http://192.168.3.187:5000/select/" + id;
     this.http.get(url).subscribe(res => {
       let results;
       results = JSON.parse(res["_body"]).SQLreturn[0];
@@ -75,54 +75,61 @@ export class DataBaseService {
         cl.fechaNacimiento = results[0].cliente_FechaNacimiento;
       }
 
-      
+
 
     },
-    err => console.log(err));
+      err => console.log(err));
     return cl;
   }
 
 
   insertCliente(cl: Cliente) {
     let results;
-    let url = "http://192.168.3.187:5001/insert/" + cl.id + "/" + cl.nombre + "/" + cl.apellido + "/" + cl.fechaNacimiento;
+    results = new Cliente();
+    let url = "http://192.168.3.187:5000/insert/" + cl.id + "/" + cl.nombre + "/" + cl.apellido + "/" + cl.fechaNacimiento;
     let sub = this.http.get(url).subscribe(data => {
       if (JSON.parse(data["_body"]).ERROR != undefined) {
 
-        results = true;
+        results = new Cliente();
       }
       else {
-
-        results = false;
+        results.id = cl.id;
+        results.nombre = cl.nombre;
+        results.apellido = cl.apellido;
+        results.fechaNacimiento = cl.fechaNacimiento;
       }
     },
-    err => {
-      results = true;
-      console.log(results);
-      
-    });
+      err => {
+        results = new Cliente();
+
+
+      });
     return results;
   }
 
 
-  insertarEmpresa(cl: Cliente,em:DatosEmpresa) {
-    let results;
-    let url = "http://192.168.3.187:5001/insert/" + cl.id + "/" + cl.nombre + "/" + cl.apellido + "/" + cl.fechaNacimiento;
+  insertarEmpresa(cl: Cliente, em: DatosEmpresa) {
+    let results = new Cliente();
+    let url = "http://192.168.3.187:5000/update/" + cl.id + "/" + em.NombreEmpresa + "/" + em.NIT + "/" + em.salario + "/" + em.FechaIngreso;
+    console.log(url);
+    
     let sub = this.http.get(url).subscribe(data => {
       if (JSON.parse(data["_body"]).ERROR != undefined) {
 
-        results = true;
+        results = new Cliente();
       }
       else {
-
-        results = false;
+        results.id = cl.id;
+        results.nombre = cl.nombre;
+        results.apellido = cl.apellido;
+        results.fechaNacimiento = cl.fechaNacimiento;
       }
     },
-    err => {
-      results = true;
-      console.log(results);
-      
-    });
+      err => {
+        results = new Cliente();
+
+
+      });
     return results;
   }
 }
