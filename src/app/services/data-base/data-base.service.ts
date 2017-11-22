@@ -83,7 +83,7 @@ export class DataBaseService {
 
 
   insertCliente(cl: Cliente) {
-    let results = true;
+    let results;
     let url = "http://192.168.3.187:5000/insert/" + cl.id + "/" + cl.nombre + "/" + cl.apellido + "/" + cl.fechaNacimiento;
     let sub = this.http.get(url).subscribe(data => {
       if (JSON.parse(data["_body"]).ERROR != undefined) {
