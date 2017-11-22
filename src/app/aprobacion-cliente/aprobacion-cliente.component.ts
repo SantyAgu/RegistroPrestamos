@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {DatosEmpresa} from '../model/DatosEmpresa/datos-empresa';
 import { Router, ActivatedRoute } from '@angular/router';
+import { Cliente } from '../model/Clientes/cliente';
+import { DataBaseService } from '../services/data-base/data-base.service'
 
 @Component({
   selector: 'app-aprobacion-cliente',
@@ -9,6 +11,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 })
 export class AprobacionClienteComponent implements OnInit {
   datos_empresa: DatosEmpresa= new DatosEmpresa();
+  cliente: Cliente;
   clienteId:number;
   validar=[false,false,false,false];
   mostrarnsalario;mostrarnit;mostrarFecha;mostrarmonbre;
@@ -19,15 +22,20 @@ export class AprobacionClienteComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private router: Router
-  ) {    
-   }
+    private router: Router,
+    private _dataBaseService: DataBaseService)
+     { }
+
+  
 
   ngOnInit() {
     this.route.params.subscribe(params => {
       if(params['id']!=null){
           this.clienteId = +params['id']; 
+          this.cliente = this._dataBaseService.getClienteID(this.clienteId);
+          console.log(this.cliente);
           console.log(this.clienteId);
+         
       }
       
    });
