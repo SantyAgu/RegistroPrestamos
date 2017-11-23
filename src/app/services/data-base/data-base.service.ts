@@ -6,9 +6,11 @@ import { Observable } from 'rxjs/Observable';
 @Injectable()
 
 
-
+//Servicio de angular para manejar las consultas a la base de datos
+//en este caso el servidor está en la dirección http://192.168.3.187:5000/
 export class DataBaseService {
 
+  ServerUrl:string ="http://192.168.3.187:5000/"
   private _clientes: Array<Cliente>;
 
   constructor(private http: Http) {
@@ -19,10 +21,10 @@ export class DataBaseService {
   cl: Cliente;
 
 
-
+//Método para obtener toda la tabla de clientes
   getClientes() {
     let results;
-    let url = "http://192.168.3.187:5000/select";
+    let url = this.ServerUrl + "select";
     this.http.get(url).subscribe(data => {
       results = JSON.parse(data["_body"]).SQLreturn[0];
       for (let i = 0; i < results.length; i++) {
@@ -39,12 +41,13 @@ export class DataBaseService {
     return this._clientes;
   }
 
+//Método para obtener de la tabla de clientes de un id específico los datos de la empresa 
 
   getEmpresa(id: Number) {
     let results;
     let de: DatosEmpresa;
     de = new DatosEmpresa();
-    let url = "http://192.168.3.187:5000/select/" + id;
+    let url = this.ServerUrl + "select/" + id;
     url=encodeURIComponent(url);
     this.http.get(url).subscribe(data => {
 
@@ -60,6 +63,7 @@ export class DataBaseService {
     return de;
   }
 
+//Método para obtener de la tabla de clientes de un id específico los datos de la persona 
   getClienteID(id: Number) {
 
     let cl: Cliente;
@@ -83,6 +87,7 @@ export class DataBaseService {
     return cl;
   }
 
+//Método para insertar en la tabla clientes, un cliente específico, sin datos de la empresa
 
   insertCliente(cl: Cliente) {
     let results;
@@ -108,6 +113,7 @@ export class DataBaseService {
     return results;
   }
 
+//Método para actualizar en la tabla clientes, de un cliente específico, los datos de la empresa
 
   insertarEmpresa(cl: Cliente, em: DatosEmpresa) {
     let results = new Cliente();
