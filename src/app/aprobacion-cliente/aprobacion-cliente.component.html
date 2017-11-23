@@ -8,7 +8,11 @@
       <div class="col-10">
         <input class="form-control" name="nombEmpreValidar" placeholder="Nombre de la empresa" [(ngModel)]="datos_empresa.NombreEmpresa"
           type="text" #nombEmpreValidar="ngModel" required pattern="[A-Z,a-z,0-9,\s]*" (keyup)="valdarNombre(nombEmpreValidar)">
-        <div style="color:#a94442"> {{mostrarmonbre}}</div>
+        <div style="color:#a94442">
+          
+          {{mostrarmonbre}}
+        
+        </div>
 
 
       </div>
@@ -19,7 +23,8 @@
       <label for="example-text-input" class="col-2 col-form-label">Nit Empresa</label>
       <div class="col-10">
         <input class="form-control" name="NIT" placeholder="Nit de la Empresa" [(ngModel)]="datos_empresa.NIT" type="number" #nitvalidar="ngModel"
-          required pattern="[0-9,-]*" (keyup)="ValidarNit(nitvalidar)"> {{mostrarnit}}
+          required pattern="[0-9,-]*" (keyup)="ValidarNit(nitvalidar)">
+          <div style="color:#a94442">  {{mostrarnit}}</div>
 
       </div>
     </div>
@@ -28,9 +33,13 @@
     <div class="form-group row {{clase_salario}}">
       <label for="example-text-input" class="col-2 col-form-label">Salario Actual</label>
       <div class="col-10">
-        <input class="form-control" name="salario" placeholder="Salario" [(ngModel)]="datos_empresa.salario" type="number" pattern="[0-9]*"
-          #salariotvalidar="ngModel" (keyup)="Validarsalario(salariotvalidar)">{{mostrarnsalario}}
-
+        <label class="form-control" > {{pesos}}<input class="sinBorde" name="salario" placeholder="Salario"  [(ngModel)]="salario_string" type="text" (keyup)="Validarsalario()">
+        </label>
+        <div style="color:#a94442">
+        {{mostrarnsalario}}
+      </div>
+        <input *ngIf="false" [(ngModel)]="datos_empresa.salario" name="otro" type="number" pattern="[0-9]*" >
+        
       </div>
     </div>
 
@@ -39,7 +48,8 @@
       <label for="example-text-input" class="col-2 col-form-label">Fecha de Ingreso</label>
       <div class="col-10">
         <input type="date" class="form-control" name="FechaIngreso" [(ngModel)]="datos_empresa.FechaIngreso" placeholder="Fecha de Ingreso"
-          #fechavalidar="ngModel" max="{{fechaHoy}}" (change)="validarFecha(fechavalidar)">{{mostrarFecha}}
+          #fechavalidar="ngModel" max="{{fechaHoy}}" (change)="validarFecha(fechavalidar)">
+          <div style="color:#a94442">{{mostrarFecha}}</div>
       </div>
     </div>
     <!-- Btn Enviar para aprobación -->

@@ -4,3 +4,13 @@
 .verde{
     color: #5cb85c;
 }
+.sinBorde:focus{
+    border:none;
+    outline: none;
+    
+    
+}
+.sinBorde{
+    width: 99%;
+    border:none
+}

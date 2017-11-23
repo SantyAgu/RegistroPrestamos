@@ -4,6 +4,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { Cliente } from '../model/Clientes/cliente';
 import { DataBaseService } from '../services/data-base/data-base.service'
 import { CookieService } from 'ngx-cookie';
+import { forEach } from '@angular/router/src/utils/collection';
 
 @Component({
   selector: 'app-aprobacion-cliente',
@@ -24,7 +25,11 @@ export class AprobacionClienteComponent implements OnInit {
   //captura la fecha de hoy 
   fechaHoy = new Date().getFullYear() + "-" + (new Date().getMonth() + 1) + "-" + (new Date().getDate() - 1);
   //imprime el resultado de aprobecion
-  resulta; ob;color;
+  resulta; ob;color;pesos;
+  salario_string:string;
+
+
+  
 
 
   constructor(
@@ -89,24 +94,85 @@ export class AprobacionClienteComponent implements OnInit {
   }
 
   //validacion campo salario
-  Validarsalario(input) {
-    if (this.datos_empresa.salario != null) {
+  Validarsalario() {
 
-      if (this.datos_empresa.salario > 100000000) {
-        this.mostrarnsalario = "El Salario no puede ser superior a $100.000.000";
-        this.clase_salario = "has-danger";
-        this.validar[2] = false;
-      } else {
-        this.mostrarnsalario = "";
-        this.clase_salario = "has-success";
-        this.validar[2] = true;
-      }
-    } else {
+    this.salario_string = this.quitarPuntos(this.salario_string);
+    
+    this.datos_empresa.salario = +this.salario_string;
+    
+    if (isNaN( this.datos_empresa.salario)) {
       this.clase_salario = "has-danger";
       this.mostrarnsalario = "El dato ingresado no es valido.";
       this.validar[2] = false;
+      this.datos_empresa.salario=undefined;
+      this.salario_string=undefined;
+      this.pesos = "";
+    }else{
+      if (this.datos_empresa.salario != null ) {
+        if (this.datos_empresa.salario > 100000000) {
+          this.mostrarnsalario = "El Salario no puede ser superior a $100.000.000";
+          this.clase_salario = "has-danger";
+          this.validar[2] = false;
+          this.pesos = ""; 
+        } else {
+          this.mostrarnsalario = "";
+          this.clase_salario = "has-success";
+          this.validar[2] = true;
+          this.pesos = "$";
+          this.salario_string = this.ponerPuntos(this.datos_empresa.salario.toString());
+          
+        }
+      } else {
+        this.clase_salario = "has-danger";
+        this.mostrarnsalario = "El dato ingresado no es valido.";
+        this.validar[2] = false;
+        this.datos_empresa.salario=undefined;
+        this.salario_string=undefined;
+        this.pesos = ""; 
+      }
     }
   }
+
+  ponerPuntos(valor:string): string{
+    let con = 1 ;
+    let numFinal:string="";
+   
+    if (valor.length<=3) {
+      return valor;
+    } else {   
+      valor = valor.split("").reverse().join("");    
+      for(let num of valor){
+       
+        if(con==4){
+          if (num==".") {
+            con -= 1;
+          }else{
+            numFinal +=".";
+            con = 1;
+          }          
+        }
+        con += 1;
+        numFinal +=num;        
+      }      
+    }
+    numFinal =numFinal.split("").reverse().join("");
+    return numFinal;
+  }
+
+  quitarPuntos(valor:string): string{    
+    let numFinal:string="";
+    for(let num of valor){
+      console.log("num:  "+num);     
+        if (num==".") {        
+          //numFinal +="";          
+        }else{
+          numFinal +=num;
+        }         
+    }        
+    return numFinal;
+  }
+
+
 
   //validacion campo fecha
   validarFecha(input) {
