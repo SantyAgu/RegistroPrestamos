@@ -8,8 +8,8 @@
       <div class="col-10">
         <input class="form-control" name="nombEmpreValidar" placeholder="Nombre de la empresa" [(ngModel)]="datos_empresa.NombreEmpresa"
           type="text" #nombEmpreValidar="ngModel" required pattern="[A-Z,a-z,0-9,\s]*" (keyup)="valdarNombre(nombEmpreValidar)">
-          <div style="color:#a94442"> {{mostrarmonbre}}</div>
-          
+        <div style="color:#a94442"> {{mostrarmonbre}}</div>
+
 
       </div>
     </div>
@@ -44,7 +44,8 @@
     </div>
     <!-- Btn Enviar para aprobación -->
     <div class="col-10">
-      <button type="submit" class="btn btn-success" style="cursor: pointer;" (click)="aprobacion()" [disabled]="!enviar()" data-toggle="modal"  data-target="#myModal">Enviar para aprobación</button>
+      <button type="submit" class="btn btn-success" style="cursor: pointer;" (click)="aprobacion()" [disabled]="!enviar()" data-toggle="modal"
+        data-target="#myModal">Enviar para aprobación</button>
     </div>
 
   </form>
@@ -75,4 +76,15 @@
 
     </div>
   </div>
+</div>
+
+
+<div class="container" style="margin-top:50px ">
+  <nav aria-label="Page navigation example">
+    <ul class="pagination ">
+      <li class="page-item">
+        <a class="page-link" href="/Inicio">Anterior</a>
+      </li>
+    </ul>
+  </nav>
 </div>
