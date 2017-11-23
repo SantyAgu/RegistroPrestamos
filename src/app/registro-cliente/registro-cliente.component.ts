@@ -5,6 +5,7 @@ import { DataBaseService } from '../services/data-base/data-base.service'
 import { RouterModule, Routes, Router } from '@angular/router';
 import "rxjs/Rx";
   import { Observable } from 'rxjs/Observable';
+  import { CookieService,CookieOptions } from 'ngx-cookie';
 
 @Component({
   selector: 'app-registro-cliente',
@@ -12,7 +13,11 @@ import "rxjs/Rx";
   styleUrls: ['./registro-cliente.component.css']
 })
 export class RegistroClienteComponent implements OnInit {
-  constructor(private _dataBaseService: DataBaseService, private _router: Router) { }
+  constructor(
+    private _dataBaseService: DataBaseService, 
+    private _router: Router,
+    private _cookieService: CookieService) { }
+
   cliente: Cliente = new Cliente();
   clienteverify: Cliente = new Cliente();
   fecha = (new Date().getFullYear() - 18) + "-" + (new Date().getMonth() + 1) + "-" + new Date().getDate();
@@ -106,7 +111,7 @@ export class RegistroClienteComponent implements OnInit {
     if (confirm("¿Desea guardar su registro?")) {
       if (this.validar) {
        this.Returned = (this._dataBaseService.insertCliente(this.cliente));
-        let timer = Observable.timer(2000);
+        let timer = Observable.timer(1500);
         timer.subscribe(() => {
           this.Redirect();
         });
@@ -119,8 +124,10 @@ export class RegistroClienteComponent implements OnInit {
   Redirect() {
     if (this.Returned.id ==0)
       alert('Error al guardar el registro');
-    else
-      this._router.navigate(["Aprobacion/" + this.cliente.id]);
+    else{
+      this._cookieService.put("ID",this.cliente.id.toString(), this.options);
+      this._router.navigate(["Aprobacion"]);
+    }
   }
 
   show(val:number) {
@@ -144,6 +151,14 @@ export class RegistroClienteComponent implements OnInit {
         this.clase_input = "has-danger";        
       }
   }
+
+  options: CookieOptions = {
+    path: '/',
+    expires: new Date(new Date().valueOf() +300000),
+    
+  };
+
+
   enviar(){
     if (this.clienteverify.id==0) {
       this.mostrarinput = "Usuario no esta registrado.";
@@ -151,7 +166,8 @@ export class RegistroClienteComponent implements OnInit {
       this.hability=false;    
     } else {
       this.regis=true;
-      this._router.navigate(["Aprobacion/" + this.clienteverify.id]);
+      this._cookieService.put("ID",this.clienteverify.id.toString(), this.options);
+      this._router.navigate(["Aprobacion"]);
     }
 
   }

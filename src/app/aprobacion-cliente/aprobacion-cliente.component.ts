@@ -3,6 +3,7 @@ import { DatosEmpresa } from '../model/DatosEmpresa/datos-empresa';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Cliente } from '../model/Clientes/cliente';
 import { DataBaseService } from '../services/data-base/data-base.service'
+import { CookieService } from 'ngx-cookie';
 
 @Component({
   selector: 'app-aprobacion-cliente',
@@ -29,19 +30,16 @@ export class AprobacionClienteComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private _dataBaseService: DataBaseService) { }
+    private _dataBaseService: DataBaseService,
+    private _cookieService: CookieService) { }
 
 
 
   ngOnInit() {
     //captura los datos de registro
-    this.route.params.subscribe(params => {
-      if (params['id'] != null) {
-        this.clienteId = +params['id'];
-        //consulta de la bd con el dato mandado desde resgistro 
-        this.cliente = this._dataBaseService.getClienteID(this.clienteId);
-      }
-    });
+    //consulta de la bd con el dato mandado desde resgistro 
+    this.clienteId = +this._cookieService.get("ID");
+    this.cliente = this._dataBaseService.getClienteID(this.clienteId);
   }
 
   //validacion campo nombre

@@ -8,11 +8,12 @@ import { AppComponent } from './app.component';
 import { RegistroClienteComponent } from './registro-cliente/registro-cliente.component';
 import { RouterModule, Routes } from '@angular/router';
 import {AprobacionClienteComponent} from './aprobacion-cliente/aprobacion-cliente.component';
+import { CookieModule } from 'ngx-cookie';
 
 
 const appRoutes: Routes = [
   { path: 'Inicio', component: RegistroClienteComponent },
-  { path: 'Aprobacion/:id',  component: AprobacionClienteComponent },  
+  { path: 'Aprobacion',  component: AprobacionClienteComponent },  
   { path: '',
     redirectTo: '/Inicio',
     pathMatch: 'full'
@@ -32,6 +33,7 @@ const appRoutes: Routes = [
     BrowserModule,
     HttpModule,
     ReactiveFormsModule,
+    CookieModule.forRoot(),
     RouterModule.forRoot(
       appRoutes,
       { enableTracing: true } // <-- debugging purposes only

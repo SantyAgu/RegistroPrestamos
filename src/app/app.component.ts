@@ -8,6 +8,7 @@ import { Cliente } from './model/Clientes/cliente';
 
 
 
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -17,13 +18,13 @@ import { Cliente } from './model/Clientes/cliente';
 
 
 export class AppComponent implements OnInit {
-  
-  
+ 
+  constructor() { }
 
   ngOnInit() {
     //this.router.navigate(["Aprobacion/" + this.cliente.id]);
-
+   
   }
-  
+
 
 }
