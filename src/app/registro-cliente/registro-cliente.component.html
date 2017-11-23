@@ -1,61 +1,59 @@
 <div class="container">
-    <ul class="nav nav-tabs">
-      <li data-toggle="tab" class="active" (click)="show(1)">
-        <a href="#">Inicio</a>
-      </li>
-      <li data-toggle="tab" (click)="show(2)">
-        <a routerLink="/Inicio"  routerLinkActive="active ">Registrarme</a>
-      </li>
-    </ul>
-  </div>
-  <div class="container" *ngIf="!regis">
-    <div class="form-group row {{clase_input}}">
-      <label for="example-text-input" class="col-2 col-form-label">Identificación*:</label>
-      <div class="col-10">
-        <input class="form-control" autocomplete="off" name="id" placeholder="Identificación" type="number" required pattern="[0-9]*"
-          [(ngModel)]="id" #input="ngModel" (keyup)="Validar(input)">
-        <div style="color:#a94442"> {{mostrarinput}}</div>
-      </div>
-  
-  
-    </div>
+  <ul class="nav nav-tabs">
+    <li data-toggle="tab" class="active" (click)="show(1)">
+      <a href="#">Inicio</a>
+    </li>
+    <li data-toggle="tab" (click)="show(2)">
+      <a routerLink="/Inicio"  routerLinkActive="active ">Registrarme</a>
+    </li>
+  </ul>
+</div>
+<div class="container" *ngIf="!regis">
+  <div class="form-group row {{clase_input}}">
+    <label for="example-text-input" class="col-2 col-form-label">Identificación*:</label>
     <div class="col-10">
-      <button type="button" class="btn btn-success" style="cursor: pointer;" [disabled]="!hability" (click)="enviar()">Enviar</button>
+      <input class="form-control" autocomplete="off" name="id" placeholder="Identificación" type="number" required pattern="[0-9]*"
+        [(ngModel)]="id" #input="ngModel" (keyup)="Validar(input)">
+      <div style="color:#a94442"> {{mostrarinput}}</div>
     </div>
+
+
   </div>
+  <div class="col-10">
+    <button type="button" class="btn btn-success" style="cursor: pointer;" [disabled]="!hability" (click)="enviar()">Enviar</button>
+  </div>
+</div>
 
 <div class="container" *ngIf="regis">
 
-  <form  #clienteForm="ngForm">
+  <form #clienteForm="ngForm">
     <div class="form-group row">
       Digite el siguente formulario:
 
     </div>
-    <div  [class]= " ChangeClassID(idvalidar) ">
+    <div [class]=" ChangeClassID(idvalidar) ">
       <label for="example-text-input" class="col-2 col-form-label">Identificación*:</label>
       <div class="col-10">
-        <input class="form-control"
-        autocomplete="off"
-       name="id" placeholder="Identificación" [(ngModel)]="cliente.id" type="number" 
-          #idvalidar="ngModel"  required pattern="[0-9]*"  (keyup)="ExisteId(idvalidar)" (change)="ExisteId(idvalidar)">
-         
-        
-          <div [hidden]="idvalidar.valid || idvalidar.pristine " style="color: #a94442;">
-            La identificación es requerida
-          </div>
-          <div   [hidden]="Intervalo() || !idvalidar.valid " style="color: #a94442;">
-            La identificación ya existe en la base de datos 
-          </div>
+        <input class="form-control" autocomplete="off" name="id" placeholder="Identificación" [(ngModel)]="cliente.id" type="number"
+          #idvalidar="ngModel" required pattern="[0-9]*" (keyup)="ExisteId(idvalidar)" (change)="ExisteId(idvalidar)">
+
+
+        <div [hidden]="idvalidar.valid || idvalidar.pristine " style="color: #a94442;">
+          La identificación es requerida
+        </div>
+        <div [hidden]="Intervalo() || !idvalidar.valid " style="color: #a94442;">
+          La identificación ya existe en la base de datos
+        </div>
       </div>
 
     </div>
 
 
-    <div [class]= " ChangeClassNames(nombrevalidar) ">
+    <div [class]=" ChangeClassNames(nombrevalidar) ">
       <label for="example-search-input" class="col-2 col-form-label">Nombres*:</label>
       <div class="col-10">
-        <input class="form-control" name="name" placeholder="Nombre" [(ngModel)]="cliente.nombre" type="text"
-          #nombrevalidar="ngModel" required pattern="[ñA-Z,ña-z,\s]*">
+        <input class="form-control" name="name" placeholder="Nombre" [(ngModel)]="cliente.nombre" type="text" #nombrevalidar="ngModel"
+          required pattern="[ñA-Z,ña-z,\s]*">
         <div [hidden]=" !(cliente.nombre=='') || nombrevalidar.pristine" style="color: #a94442;">
           El nombre es requerido
         </div>
@@ -65,11 +63,11 @@
       </div>
     </div>
 
-    <div [class]= " ChangeClassNames(apellidovalidar) ">
+    <div [class]=" ChangeClassNames(apellidovalidar) ">
       <label for="example-search-input" class="col-2 col-form-label">Apellidos*:</label>
       <div class="col-10">
-        <input class="form-control" name="apellido" placeholder="Apellido" [(ngModel)]="cliente.apellido" type="text" 
-          #apellidovalidar="ngModel" required pattern="[ñA-Z,ña-z,\s]*">
+        <input class="form-control" name="apellido" placeholder="Apellido" [(ngModel)]="cliente.apellido" type="text" #apellidovalidar="ngModel"
+          required pattern="[ñA-Z,ña-z,\s]*">
 
         <div [hidden]=" !(cliente.apellido=='') || apellidovalidar.pristine " style="color: #a94442;">
           El apellido es requerido
@@ -87,17 +85,25 @@
       </label>
       <div class="col-10">
 
-        <input  class="form-control" name="fechaNacimiento" placeholder="Fecha de Nacimiento" [(ngModel)]="cliente.fechaNacimiento"
+        <input class="form-control" name="fechaNacimiento" placeholder="Fecha de Nacimiento" [(ngModel)]="cliente.fechaNacimiento"
           type="date" max="{{fecha}}" value="" #fechavalidar="ngModel" required>
 
-          <div   [hidden]="!(cliente.fechaNacimiento.toString()>fecha)   || fechavalidar.pristine" style="color: #a94442;">
-            Debe ser mayor a 18 años 
-          </div>
+        <div [hidden]="!(cliente.fechaNacimiento.toString()>fecha)   || fechavalidar.pristine" style="color: #a94442;">
+          Debe ser mayor a 18 años
+        </div>
       </div>
 
     </div>
     <div class="col-10">
-      <button type="submit" class="btn btn-success" style="cursor: pointer;" [disabled]="!Enviar(clienteForm)"  (click)="guardar()">Enviar</button>
+      <button type="submit" class="btn btn-success" style="cursor: pointer;" [disabled]="!Enviar(clienteForm)" (click)="guardar()">Enviar</button>
     </div>
   </form>
+</div>
+<div class="container">
+  <ul class="pager">
+    <li class="previous"> <a href="#">Anterior</a>
+    </li>
+    <li class="next"> <a href="#">Siguiente</a>
+    </li>
+  </ul>
 </div>
